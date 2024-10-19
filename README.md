@@ -1,1 +1,2 @@
-# Gogi-Ordering-Interface
+# Gogi Ordering Interface
+> Project for **CPSC 481**!
