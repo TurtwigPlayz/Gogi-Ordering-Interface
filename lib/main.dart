@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/theme_data.dart';
+import 'package:gogi_ordering_interface/widgets/bottom_bar.dart';
+import 'package:gogi_ordering_interface/widgets/menu_container.dart';
+import 'package:gogi_ordering_interface/widgets/order_panel.dart';
+import 'package:gogi_ordering_interface/widgets/top_bar.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +14,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      title: 'Gogi Ordering Interface',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.dark,
+      home: const Scaffold(
+        appBar: TopBar(),
+        bottomNavigationBar: BottomBar(),
+        body: Row(
+          children: <Widget>[
+            Expanded(
+              child: MenuContainer(),
+            ),
+            OrderPanel(),
+          ],
         ),
       ),
     );
