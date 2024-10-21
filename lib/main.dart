@@ -21,12 +21,18 @@ class MainApp extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark,
       home: const Scaffold(
-        appBar: TopBar(),
-        bottomNavigationBar: BottomBar(),
         body: Row(
           children: <Widget>[
             Expanded(
-              child: MenuContainer(),
+              child: Column(
+                children: <Widget>[
+                  TopBar(),
+                  Expanded(
+                    child: MenuContainer(),
+                  ),
+                  BottomBar(),
+                ],
+              ),
             ),
             OrderPanel(),
           ],

@@ -5,11 +5,11 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BottomAppBar(
-        color: Colors.green,
-        child: Center(
-          child: Text('Bottom bar here'),
-        ),
-      );
+    return Container(
+      color: Colors.indigo,
+      child: const Center(
+        child: Text('Bottom bar'),
+      ),
+    );
   }
 }

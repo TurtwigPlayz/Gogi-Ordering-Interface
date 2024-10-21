@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class TopBar extends StatelessWidget implements PreferredSizeWidget {
+class TopBar extends StatelessWidget {
   const TopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      scrolledUnderElevation: 0,
-      automaticallyImplyLeading: false,
-      title: const Text('Nav bar and history button'),
+    return Container(
+      color: Colors.purple,
+      child: const Center(
+        child: Text('Nav bar'),
+      ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
