@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 
-class OrderPanel extends StatelessWidget {
+class OrderPanel extends StatefulWidget {
   const OrderPanel({super.key});
 
   @override
+  State<OrderPanel> createState() => _OrderPanelState();
+}
+
+class _OrderPanelState extends State<OrderPanel> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: const Padding(
-        padding: EdgeInsets.all(18.0),
-        child: Center(
-          child: Text('Order items here'),
-        ),
-      )
+    return Padding(
+      padding: const EdgeInsets.all(14.0),
+      child: Column(
+        children: <Widget>[
+          InkwellButton(
+            onTap: () => {},
+            title: 'Order History',
+            icon: Icons.history,
+          ),
+        ],
+      ),
     );
   }
 }
