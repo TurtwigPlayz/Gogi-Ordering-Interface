@@ -24,7 +24,7 @@ class OrderItem extends StatelessWidget {
     final session = Provider.of<SessionProvider>(context, listen: false);
 
     return Material(
-      color: Colors.white.withOpacity(0.1),
+      color: Theme.of(context).cardColor,
       borderRadius: borderRadius,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -58,6 +58,7 @@ class OrderItem extends StatelessWidget {
               InkwellButton(
                 onTap: () => {},
                 icon: Icons.edit,
+                splashColor: Colors.green,
                 borderRadius: iconBorderRadius,
                 padding: iconPadding,
               ),
@@ -65,6 +66,7 @@ class OrderItem extends StatelessWidget {
               InkwellButton(
                 onTap: () => session.removeFromOrder(model.menuItem),
                 icon: Icons.delete,
+                splashColor: Colors.red,
                 borderRadius: iconBorderRadius,
                 padding: iconPadding,
               ),
