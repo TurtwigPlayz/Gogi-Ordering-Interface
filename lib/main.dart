@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/bottom_bar.dart';
 import 'package:gogi_ordering_interface/widgets/menu_container.dart';
@@ -6,7 +8,12 @@ import 'package:gogi_ordering_interface/widgets/order_panel.dart';
 import 'package:gogi_ordering_interface/widgets/top_bar.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (BuildContext context) => SessionProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
