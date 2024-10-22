@@ -48,20 +48,14 @@ class _OrderPanelState extends State<OrderPanel> {
                     children: <Widget>[
                       if (!_isViewingOrderHistory) ...session.currentOrder.values.expand((item) {
                         return <Widget>[
-                          OrderItem(
-                            title: item.menuItem.name,
-                            price: item.menuItem.unitPrice * item.quantity,
-                            quantity: item.quantity,
-                          ),
+                          OrderItem(model: item),
                           const SizedBox(height: itemSpacing), // Adjust the height as needed
                         ];
                       })
                       else ...session.orderHistory.expand((item) {
                         return <Widget>[
                           OrderItem(
-                            title: item.menuItem.name,
-                            price: item.menuItem.unitPrice * item.quantity,
-                            quantity: item.quantity,
+                            model: item,
                             isHistorical: true,
                           ),
                           const SizedBox(height: itemSpacing), // Adjust the height as needed

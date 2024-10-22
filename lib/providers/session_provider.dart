@@ -33,6 +33,12 @@ class SessionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeFromOrder(MenuItemModel menuItem) {
+    _currentOrder.remove(menuItem);
+
+    notifyListeners();
+  }
+
   void moveOrderToHistory() {
     _orderHistory.addAll(_currentOrder.values);
     _currentOrder.clear();

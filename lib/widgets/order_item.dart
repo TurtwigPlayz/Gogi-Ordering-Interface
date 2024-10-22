@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/models/order_item_model.dart';
+import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({
     super.key,
-    required this.title,
-    required this.price,
-    required this.quantity,
+    required this.model,
     this.isHistorical = false,
   });
 
-  final String title;
-  final double price;
-  final int quantity;
+  final OrderItemModel model;
   final bool isHistorical;
 
   @override
@@ -21,6 +20,8 @@ class OrderItem extends StatelessWidget {
 
     const double iconBorderRadius = 20.0;
     const double iconPadding = 7.0;
+
+    final session = Provider.of<SessionProvider>(context, listen: false);
 
     return Material(
       color: Colors.white.withOpacity(0.1),
@@ -35,19 +36,19 @@ class OrderItem extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      title,
+                      model.menuItem.name,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(width: 10.0),
                     Text(
-                      'x$quantity',
+                      'x${model.quantity}',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
                 const SizedBox(height: 5.0),
                 Text(
-                  '\$$price',
+                  '\$${model.menuItem.unitPrice * model.quantity}',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
@@ -62,7 +63,7 @@ class OrderItem extends StatelessWidget {
               ),
               const SizedBox(width: 8.0),
               InkwellButton(
-                onTap: () => {},
+                onTap: () => session.removeFromOrder(model.menuItem),
                 icon: Icons.delete,
                 borderRadius: iconBorderRadius,
                 padding: iconPadding,
