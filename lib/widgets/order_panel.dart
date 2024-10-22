@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/order_item.dart';
+import 'package:provider/provider.dart';
 
 class OrderPanel extends StatefulWidget {
   const OrderPanel({super.key});
@@ -20,6 +22,8 @@ class _OrderPanelState extends State<OrderPanel> {
 
   @override
   Widget build(BuildContext context) {
+    const double itemSpacing = 10.0;
+
     return SizedBox(
       width: 240.0,
       child: Padding(
@@ -37,28 +41,34 @@ class _OrderPanelState extends State<OrderPanel> {
               icon: Icons.arrow_back,
             ),
             const SizedBox(height: 20.0),
-            const Expanded(
+            Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    OrderItem(
-                      title: 'Pork Belly',
-                      price: 12.99,
-                      quantity: 2,
-                    ),
-                    SizedBox(height: 10.0),
-                    OrderItem(
-                      title: 'Kimchi',
-                      price: 4.99,
-                      quantity: 1,
-                    ),
-                    SizedBox(height: 10.0),
-                    OrderItem(
-                      title: 'Rice',
-                      price: 2.99,
-                      quantity: 1,
-                    ),
-                  ],
+                child: Consumer<SessionProvider>(
+                  builder: (context, session, child) => Column(
+                    children: <Widget>[
+                      if (!_isViewingOrderHistory) ...session.currentOrder.values.expand((item) {
+                        return <Widget>[
+                          OrderItem(
+                            title: item.menuItem.name,
+                            price: item.menuItem.unitPrice * item.quantity,
+                            quantity: item.quantity,
+                          ),
+                          const SizedBox(height: itemSpacing), // Adjust the height as needed
+                        ];
+                      })
+                      else ...session.orderHistory.expand((item) {
+                        return <Widget>[
+                          OrderItem(
+                            title: item.menuItem.name,
+                            price: item.menuItem.unitPrice * item.quantity,
+                            quantity: item.quantity,
+                            isHistorical: true,
+                          ),
+                          const SizedBox(height: itemSpacing), // Adjust the height as needed
+                        ];
+                      }),
+                    ],
+                  ),
                 ),
               ),
             ),

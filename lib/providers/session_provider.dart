@@ -1,30 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/models/menu_item_model.dart';
 import 'package:gogi_ordering_interface/models/order_item_model.dart';
 
 class SessionProvider extends ChangeNotifier {
-  SessionProvider({
-    List<OrderItemModel> currentOrder = const <OrderItemModel>[],
-    List<OrderItemModel> orderHistory = const <OrderItemModel>[],
+  SessionProvider._internalConstructor({
+    required Map<MenuItemModel, OrderItemModel> currentOrder,
+    required List<OrderItemModel> orderHistory
   }) :
     _currentOrder = currentOrder,
     _orderHistory = orderHistory;
 
-  final List<OrderItemModel> _currentOrder;
+  final Map<MenuItemModel, OrderItemModel> _currentOrder;
   final List<OrderItemModel> _orderHistory;
 
-  void addToOrder(OrderItemModel orderItem) {
-    _currentOrder.add(orderItem);
+  factory SessionProvider() {
+    return SessionProvider._internalConstructor(
+      currentOrder: {},
+      orderHistory: []
+    );
+  }
+
+  void addToOrder(MenuItemModel menuItem) {
+    OrderItemModel? item = _currentOrder[menuItem];
+
+    if (item != null) {
+      _currentOrder[menuItem]!.updateQuantity(1);
+    }
+    else {
+      _currentOrder[menuItem] = OrderItemModel(menuItem);
+    }
 
     notifyListeners();
   }
 
   void moveOrderToHistory() {
-    _orderHistory.addAll(_currentOrder);
+    _orderHistory.addAll(_currentOrder.values);
     _currentOrder.clear();
 
     notifyListeners();
   }
 
-  List<OrderItemModel> get currentOrder => List.unmodifiable(_currentOrder);
+  Map<MenuItemModel, OrderItemModel> get currentOrder => Map.unmodifiable(_currentOrder);
   List<OrderItemModel> get orderHistory => List.unmodifiable(_orderHistory);
 }

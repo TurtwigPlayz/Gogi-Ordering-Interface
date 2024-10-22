@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/models/menu_item_model.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/bottom_bar.dart';
@@ -21,6 +22,24 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final session = Provider.of<SessionProvider>(context, listen: false);
+
+    // Some hardcoded menu items
+    const MenuItemModel porkBelly = MenuItemModel(
+      name: 'Pork Belly',
+      unitPrice: 12.99
+    );
+
+    const MenuItemModel kimchi = MenuItemModel(
+      name: 'Kimchi',
+      unitPrice: 4.99
+    );
+
+    // Hardcode adding items to order
+    session.addToOrder(porkBelly);
+    session.addToOrder(kimchi);
+    session.addToOrder(kimchi);
+
     return MaterialApp(
       title: 'Gogi Ordering Interface',
       debugShowCheckedModeBanner: false,
