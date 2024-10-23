@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/order_item.dart';
@@ -21,13 +22,29 @@ class _OrderPanelState extends State<OrderPanel> {
     });
   }
 
-  Widget _buildTotalCostTag(BuildContext context, String text, Color color) {
+  Widget _buildTotalCostTag(BuildContext context, String text, double cost) {
     return Row(
       children: <Widget>[
         Expanded(
-          child: TaggedText(
-            text: text,
-            backgroundColor: color
+          child: Material(
+            color: Theme.of(context).shadowColor,
+            borderRadius: BorderRadius.circular(10.0),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    text,
+                    style: Theme.of(context).textTheme.bodySmall
+                  ),
+                  const Expanded(child: SizedBox()),
+                  TaggedText(
+                    text: '\$${cost.toStringAsPrecision(3)}',
+                    backgroundColor: greenColor
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
@@ -80,9 +97,9 @@ class _OrderPanelState extends State<OrderPanel> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              _buildTotalCostTag(context, 'Order Cost: \$${session.orderTotalCost}', Theme.of(context).cardColor),
+              _buildTotalCostTag(context, 'Order Cost', session.orderTotalCost),
               const SizedBox(height: 7.0),
-              _buildTotalCostTag(context, 'Current Cost: \$${session.currentTotalCost}', Theme.of(context).cardColor),
+              _buildTotalCostTag(context, 'Current Cost', session.currentTotalCost),
               const SizedBox(height: 15.0),
               InkwellButton(
                 onTap: () => {},

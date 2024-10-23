@@ -21,9 +21,7 @@ class SessionProvider extends ChangeNotifier {
   }
 
   void addToOrder(MenuItemModel menuItem) {
-    OrderItemModel? item = _currentOrder[menuItem];
-
-    if (item != null) {
+    if (_currentOrder[menuItem] != null) {
       _currentOrder[menuItem]!.updateQuantity(1);
     }
     else {
