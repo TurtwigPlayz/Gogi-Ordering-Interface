@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gogi_ordering_interface/models/order_item_model.dart';
 import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
+import 'package:gogi_ordering_interface/models/order_item_model.dart';
+import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 
@@ -40,16 +42,16 @@ class OrderItem extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(width: 10.0),
-                    Text(
-                      'x${model.quantity}',
-                      style: Theme.of(context).textTheme.bodySmall,
+                    TaggedText(
+                      text: 'x${model.quantity}',
+                      color: blueColor
                     ),
                   ],
                 ),
                 const SizedBox(height: 5.0),
-                Text(
-                  '\$${model.menuItem.unitPrice * model.quantity}',
-                  style: Theme.of(context).textTheme.bodySmall,
+                TaggedText(
+                  text: '\$${model.menuItem.unitPrice * model.quantity}',
+                  color: greenColor
                 ),
               ],
             ),
@@ -58,7 +60,6 @@ class OrderItem extends StatelessWidget {
               InkwellButton(
                 onTap: () => {},
                 icon: Icons.edit,
-                splashColor: Colors.green,
                 borderRadius: iconBorderRadius,
                 padding: iconPadding,
               ),
@@ -66,7 +67,7 @@ class OrderItem extends StatelessWidget {
               InkwellButton(
                 onTap: () => session.removeFromOrder(model.menuItem),
                 icon: Icons.delete,
-                splashColor: Colors.red,
+                splashColor: redColor,
                 borderRadius: iconBorderRadius,
                 padding: iconPadding,
               ),

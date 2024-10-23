@@ -35,10 +35,12 @@ class MainApp extends StatelessWidget {
       unitPrice: 4.99
     );
 
-    // Hardcode adding items to order
-    session.addToOrder(porkBelly);
-    session.addToOrder(kimchi);
-    session.addToOrder(kimchi);
+    // Defer adding items to order for testing
+    Future.delayed(const Duration(seconds: 1), () {
+      session.addToOrder(porkBelly);
+      session.addToOrder(kimchi);
+      session.addToOrder(kimchi);
+    });
 
     return MaterialApp(
       title: 'Gogi Ordering Interface',

@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+const Color redColor = Color(0xFFE53935);
+const Color greenColor = Color.fromARGB(255, 30, 158, 37);
+const Color blueColor = Color.fromARGB(255, 84, 104, 239);
+
+final String? fontFamily = GoogleFonts.ubuntu().fontFamily;
 
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -12,11 +19,16 @@ final ThemeData darkTheme = ThemeData(
   iconTheme: const IconThemeData(
     color: Color(0xFFFAFAFA)
   ),
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     bodyMedium: TextStyle(
-      color: Color(0xFFFAFAFA)
-    )
-  )
+      color: const Color(0xFFFAFAFA),
+      fontFamily: fontFamily,
+    ),
+    bodySmall: TextStyle(
+      color: const Color(0xFFFAFAFA),
+      fontFamily: fontFamily,
+    ),
+  ),
 );
 
 final ThemeData lightTheme = ThemeData(
@@ -31,9 +43,14 @@ final ThemeData lightTheme = ThemeData(
   iconTheme: const IconThemeData(
     color: Color(0xFF121212)
   ),
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     bodyMedium: TextStyle(
-      color: Color(0xFF121212)
-    )
-  )
+      color: const Color(0xFF121212),
+      fontFamily: fontFamily,
+    ),
+    bodySmall: TextStyle(
+      color: const Color(0xFF121212),
+      fontFamily: fontFamily,
+    ),
+  ),
 );

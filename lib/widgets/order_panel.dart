@@ -25,7 +25,7 @@ class _OrderPanelState extends State<OrderPanel> {
     const double itemSpacing = 10.0;
 
     return SizedBox(
-      width: 240.0,
+      width: 300.0,
       child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(
