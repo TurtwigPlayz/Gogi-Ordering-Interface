@@ -44,14 +44,14 @@ class OrderItem extends StatelessWidget {
                     const SizedBox(width: 10.0),
                     TaggedText(
                       text: 'x${model.quantity}',
-                      color: blueColor
+                      backgroundColor: blueColor
                     ),
                   ],
                 ),
                 const SizedBox(height: 5.0),
                 TaggedText(
-                  text: '\$${model.menuItem.unitPrice * model.quantity}',
-                  color: greenColor
+                  text: '\$${model.cost}',
+                  backgroundColor: greenColor
                 ),
               ],
             ),

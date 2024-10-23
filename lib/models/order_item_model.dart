@@ -19,6 +19,8 @@ class OrderItemModel {
   int get quantity => _quantity;
   Map<String, bool> get options => _options;
 
+  double get cost => _quantity * _menuItem.unitPrice;
+
   void updateQuantity(int amount) {
     _quantity = max(0, _quantity + amount);
   }

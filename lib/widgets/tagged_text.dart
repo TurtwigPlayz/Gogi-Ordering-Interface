@@ -4,16 +4,15 @@ class TaggedText extends StatelessWidget {
   const TaggedText({
     super.key,
     required this.text,
-    required this.color,
+    required this.backgroundColor,
   });
 
   final String text;
-  final Color color;
-
+  final Color backgroundColor;
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: color,
+      color: backgroundColor,
       borderRadius: BorderRadius.circular(8.0),
       child: Padding(
         padding: const EdgeInsets.only(

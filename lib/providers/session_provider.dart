@@ -48,4 +48,7 @@ class SessionProvider extends ChangeNotifier {
 
   Map<MenuItemModel, OrderItemModel> get currentOrder => Map.unmodifiable(_currentOrder);
   List<OrderItemModel> get orderHistory => List.unmodifiable(_orderHistory);
+
+  double get orderTotalCost => _currentOrder.values.fold(0, (acc, orderItem) => acc + orderItem.cost);
+  double get currentTotalCost => _orderHistory.fold(0, (acc, historicalItem) => acc + historicalItem.cost);
 }

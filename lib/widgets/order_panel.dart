@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/order_item.dart';
-import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
 
 class OrderPanel extends StatefulWidget {
   const OrderPanel({super.key});
@@ -20,6 +21,19 @@ class _OrderPanelState extends State<OrderPanel> {
     });
   }
 
+  Widget _buildTotalCostTag(BuildContext context, String text, Color color) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: TaggedText(
+            text: text,
+            backgroundColor: color
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     const double itemSpacing = 10.0;
@@ -28,23 +42,23 @@ class _OrderPanelState extends State<OrderPanel> {
       width: 300.0,
       child: Padding(
         padding: const EdgeInsets.all(14.0),
-        child: Column(
-          children: <Widget>[
-            if (!_isViewingOrderHistory) InkwellButton(
-              onTap: () => _toggleView(),
-              title: 'Order History',
-              icon: Icons.history,
-            )
-            else InkwellButton(
-              onTap: () => _toggleView(),
-              title: 'Back To Order',
-              icon: Icons.arrow_back,
-            ),
-            const SizedBox(height: 20.0),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Consumer<SessionProvider>(
-                  builder: (context, session, child) => Column(
+        child: Consumer<SessionProvider>(
+          builder: (context, session, child) => Column(
+            children: <Widget>[
+              if (!_isViewingOrderHistory) InkwellButton(
+                onTap: () => _toggleView(),
+                title: 'Order History',
+                icon: Icons.history,
+              )
+              else InkwellButton(
+                onTap: () => _toggleView(),
+                title: 'Back To Order',
+                icon: Icons.arrow_back,
+              ),
+              const SizedBox(height: 20.0),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: <Widget>[
                       if (!_isViewingOrderHistory) ...session.currentOrder.values.expand((item) {
                         return <Widget>[
@@ -65,14 +79,18 @@ class _OrderPanelState extends State<OrderPanel> {
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20.0),
-            InkwellButton(
-              onTap: () => {},
-              title: 'Order Now',
-              icon: Icons.shopping_cart_checkout,
-            ),
-          ],
+              const SizedBox(height: 20.0),
+              _buildTotalCostTag(context, 'Order Cost: \$${session.orderTotalCost}', Theme.of(context).cardColor),
+              const SizedBox(height: 7.0),
+              _buildTotalCostTag(context, 'Current Cost: \$${session.currentTotalCost}', Theme.of(context).cardColor),
+              const SizedBox(height: 15.0),
+              InkwellButton(
+                onTap: () => {},
+                title: 'Order Now',
+                icon: Icons.shopping_cart_checkout,
+              ),
+            ],
+          ),
         ),
       ),
     );
