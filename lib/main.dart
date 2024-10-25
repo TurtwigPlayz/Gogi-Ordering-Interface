@@ -48,22 +48,25 @@ class MainApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark,
-      home: const Scaffold(
-        body: Row(
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  TopBar(),
-                  Expanded(
-                    child: MenuContainer(),
-                  ),
-                  BottomBar(),
-                ],
+      home: const DefaultTabController(
+        length: 5, // Number of tabs
+        child: Scaffold(
+          body: Row(
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    TopBar(), 
+                    Expanded(
+                      child: MenuContainer(), 
+                    ),
+                    BottomBar(),
+                  ],
+                ),
               ),
-            ),
-            OrderPanel(),
-          ],
+              OrderPanel(),
+            ],
+          ),
         ),
       ),
     );

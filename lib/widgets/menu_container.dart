@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// This will eventually become a stateful widget
 class MenuContainer extends StatelessWidget {
   const MenuContainer({super.key});
 
@@ -8,8 +7,14 @@ class MenuContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.blue,
-      child: const Center(
-        child: Text('Menu items here'),
+      child: const TabBarView(
+        children: [
+          Center(child: Text('Content for Tab 1')),
+          Center(child: Text('Content for Tab 2')),
+          Center(child: Text('Content for Tab 3')),
+          Center(child: Text('Content for Tab 4')),
+          Center(child: Text('Content for Tab 5')),
+        ],
       ),
     );
   }
