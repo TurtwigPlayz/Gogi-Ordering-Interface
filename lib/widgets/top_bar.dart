@@ -7,8 +7,17 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.purple,
-      child: const Center(
-        child: Text('Nav bar'),
+      child: const TabBar(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.grey,
+        indicatorColor: Colors.white,
+        tabs: [
+          Tab(text: 'Tab 1'),
+          Tab(text: 'Tab 2'),
+          Tab(text: 'Tab 3'),
+          Tab(text: 'Tab 4'),
+          Tab(text: 'Tab 5'),
+        ],
       ),
     );
   }
