@@ -6,12 +6,12 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purple,
-      child: const TabBar(
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.grey,
-        indicatorColor: Colors.white,
-        tabs: [
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: TabBar(
+        labelColor: Theme.of(context).textTheme.bodyMedium!.color,
+        unselectedLabelColor: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.5),
+        indicatorColor: Theme.of(context).textTheme.bodyMedium!.color,
+        tabs: const <Widget>[
           Tab(text: 'Tab 1'),
           Tab(text: 'Tab 2'),
           Tab(text: 'Tab 3'),

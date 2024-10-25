@@ -6,7 +6,7 @@ class MenuContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: const TabBarView(
         children: [
           Center(child: Text('Content for Tab 1')),
