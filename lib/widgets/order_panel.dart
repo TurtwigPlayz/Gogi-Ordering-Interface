@@ -55,7 +55,15 @@ class _OrderPanelState extends State<OrderPanel> {
   Widget build(BuildContext context) {
     const double itemSpacing = 10.0;
 
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          left: BorderSide(
+            color: Theme.of(context).cardColor,
+            width: 1
+          ),
+        ),
+      ),
       width: 300.0,
       child: Padding(
         padding: const EdgeInsets.all(14.0),

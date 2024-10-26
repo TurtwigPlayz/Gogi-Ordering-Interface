@@ -9,8 +9,10 @@ class TopBar extends StatelessWidget {
       color: Theme.of(context).scaffoldBackgroundColor,
       child: TabBar(
         labelColor: Theme.of(context).textTheme.bodyMedium!.color,
-        unselectedLabelColor: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.5),
         indicatorColor: Theme.of(context).textTheme.bodyMedium!.color,
+        unselectedLabelColor: Theme.of(context).cardColor,
+        dividerColor: Theme.of(context).cardColor,
+        dividerHeight: 1,
         tabs: const <Widget>[
           Tab(text: 'Tab 1'),
           Tab(text: 'Tab 2'),
