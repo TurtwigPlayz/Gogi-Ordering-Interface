@@ -58,7 +58,7 @@ class MainApp extends StatelessWidget {
                   children: <Widget>[
                     TopBar(), 
                     Expanded(
-                      child: MenuContainer(), 
+                      child: MenuPage(), 
                     ),
                     BottomBar(),
                   ],
