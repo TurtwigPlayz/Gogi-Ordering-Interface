@@ -5,25 +5,10 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 2 items per row, for a 2x2 grid on each page
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 8.0,
-            childAspectRatio: 0.75,
-          ),
-          itemCount: 4, // 4 items per page
-          itemBuilder: (context, index) {
-            return MenuItem(
-              imagePath: 'lib/images/food_item_$index.png', // Sample image path
-              name: 'Food Item $index', // Replace with actual item name
-              price: '\$${(10 + index * 2).toStringAsFixed(2)}', // Sample price
-            );
-          },
-        ),
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: TabBarView(
+        children: List.generate(5, (index) => _buildMenuPageMaker(context)),
       ),
     );
   }
@@ -85,4 +70,26 @@ class MenuItem extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget _buildMenuPageMaker(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, // 2 items per row
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 8.0,
+        childAspectRatio: 0.75,
+      ),
+      itemCount: 4, // 4 items per page
+      itemBuilder: (context, index) {
+        return MenuItem(
+          imagePath: 'lib/images/food_item_$index.png', // Sample image path
+          name: 'Food Item $index', // Replace with actual item name
+          price: '\$${(10 + index * 2).toStringAsFixed(2)}', // Sample price
+        );
+      },
+    ),
+  );
 }
