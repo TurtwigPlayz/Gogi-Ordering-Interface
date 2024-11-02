@@ -33,15 +33,11 @@ class _OrderPanelState extends State<OrderPanel> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: <Widget>[
-                  Text(
-                    text,
-                    style: Theme.of(context).textTheme.bodySmall
-                  ),
+                  Text(text, style: Theme.of(context).textTheme.bodySmall),
                   const Expanded(child: SizedBox()),
                   TaggedText(
-                    text: '\$${cost.toStringAsPrecision(3)}',
-                    backgroundColor: greenColor
-                  ),
+                      text: '\$${cost.toStringAsPrecision(3)}',
+                      backgroundColor: greenColor),
                 ],
               ),
             ),
@@ -58,10 +54,7 @@ class _OrderPanelState extends State<OrderPanel> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(
-            color: Theme.of(context).cardColor,
-            width: 1
-          ),
+          left: BorderSide(color: Theme.of(context).cardColor, width: 1),
         ),
       ),
       width: 300.0,
@@ -70,45 +63,54 @@ class _OrderPanelState extends State<OrderPanel> {
         child: Consumer<SessionProvider>(
           builder: (context, session, child) => Column(
             children: <Widget>[
-              if (!_isViewingOrderHistory) InkwellButton(
-                onTap: () => _toggleView(),
-                title: 'Order History',
-                icon: Icons.history,
-              )
-              else InkwellButton(
-                onTap: () => _toggleView(),
-                title: 'Back To Order',
-                icon: Icons.arrow_back,
-              ),
-              const SizedBox(height: 20.0),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      if (!_isViewingOrderHistory) ...session.currentOrder.values.expand((item) {
-                        return <Widget>[
-                          OrderItem(model: item),
-                          const SizedBox(height: itemSpacing), // Adjust the height as needed
-                        ];
-                      })
-                      else ...session.orderHistory.expand((item) {
-                        return <Widget>[
-                          OrderItem(
-                            model: item,
-                            isHistorical: true,
-                          ),
-                          const SizedBox(height: itemSpacing), // Adjust the height as needed
-                        ];
-                      }),
+                      if (!_isViewingOrderHistory)
+                        ...session.currentOrder.values.expand((item) {
+                          return <Widget>[
+                            OrderItem(model: item),
+                            const SizedBox(
+                                height:
+                                    itemSpacing), // Adjust the height as needed
+                          ];
+                        })
+                      else
+                        ...session.orderHistory.expand((item) {
+                          return <Widget>[
+                            OrderItem(
+                              model: item,
+                              isHistorical: true,
+                            ),
+                            const SizedBox(
+                                height:
+                                    itemSpacing), // Adjust the height as needed
+                          ];
+                        }),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 20.0),
               _buildTotalCostTag(context, 'Order Cost', session.orderTotalCost),
-              const SizedBox(height: 7.0),
-              _buildTotalCostTag(context, 'Current Cost', session.currentTotalCost),
-              const SizedBox(height: 15.0),
+              const SizedBox(height: 10.0),
+              _buildTotalCostTag(
+                  context, 'Current Cost', session.currentTotalCost),
+              const SizedBox(height: 20.0),
+              if (!_isViewingOrderHistory)
+                InkwellButton(
+                  onTap: () => _toggleView(),
+                  title: 'Order History',
+                  icon: Icons.history,
+                )
+              else
+                InkwellButton(
+                  onTap: () => _toggleView(),
+                  title: 'Back To Order',
+                  icon: Icons.arrow_back,
+                ),
+              const SizedBox(height: 10.0),
               InkwellButton(
                 onTap: () => {},
                 title: 'Order Now',

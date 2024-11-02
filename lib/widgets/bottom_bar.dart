@@ -6,7 +6,11 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.indigo,
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Theme.of(context).cardColor, width: 1),
+        ),
+      ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -17,74 +21,73 @@ class BottomBar extends StatelessWidget {
             width: 90,
             height: 30,
           ),
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  // Open the pop-up dialog
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Request Assistance'),
-                        content: const Text('A waiter will be with you soon'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); // Close the dialog
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); // Close the dialog
-                            },
-                            child: const Text('Confirm'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: const Text('Request Assistance'),
-                style: ElevatedButton.styleFrom(),
-              ),
-              const SizedBox(width: 10), // Spacing between buttons
-              ElevatedButton(
-                onPressed: () {
-                  // Open the pop-up dialog
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Request Assistance'),
-                        content: const Text('A waiter will be with you soon'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); // Close the dialog
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); // Close the dialog
-                            },
-                            child: const Text('Confirm'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: const Text('Pay Now'),
-                style: ElevatedButton.styleFrom(),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         // Open the pop-up dialog
+          //         showDialog(
+          //           context: context,
+          //           builder: (BuildContext context) {
+          //             return AlertDialog(
+          //               title: const Text('Request Assistance'),
+          //               content: const Text('A waiter will be with you soon'),
+          //               actions: [
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     Navigator.of(context).pop(); // Close the dialog
+          //                   },
+          //                   child: const Text('Cancel'),
+          //                 ),
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     Navigator.of(context).pop(); // Close the dialog
+          //                   },
+          //                   child: const Text('Confirm'),
+          //                 ),
+          //               ],
+          //             );
+          //           },
+          //         );
+          //       },
+          //       child: const Text('Request Assistance'),
+          //       style: ElevatedButton.styleFrom(),
+          //     ),
+          //     const SizedBox(width: 10), // Spacing between buttons
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         // Open the pop-up dialog
+          //         showDialog(
+          //           context: context,
+          //           builder: (BuildContext context) {
+          //             return AlertDialog(
+          //               title: const Text('Request Assistance'),
+          //               content: const Text('A waiter will be with you soon'),
+          //               actions: [
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     Navigator.of(context).pop(); // Close the dialog
+          //                   },
+          //                   child: const Text('Cancel'),
+          //                 ),
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     Navigator.of(context).pop(); // Close the dialog
+          //                   },
+          //                   child: const Text('Confirm'),
+          //                 ),
+          //               ],
+          //             );
+          //           },
+          //         );
+          //       },
+          //       child: const Text('Pay Now'),
+          //       style: ElevatedButton.styleFrom(),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
   }
 }
-
