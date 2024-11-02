@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/theme_data.dart';
+import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
+import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
+import 'package:gogi_ordering_interface/widgets/logo.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -11,15 +15,41 @@ class BottomBar extends StatelessWidget {
           top: BorderSide(color: Theme.of(context).cardColor, width: 1),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: const EdgeInsets.only(
+        left: 5.0,
+        right: 15.0,
+        top: 5.0,
+        bottom: 5.0,
+      ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Move the image to the left
-          Image.asset(
-            'lib/images/GogiLogo.png', // Use the correct asset path
-            width: 90,
-            height: 30,
+        children: <Widget>[
+          const Logo(),
+          const SizedBox(width: 7.0),
+          IconInkwellButton(
+            onTap: () => {},
+            icon: Icons.light_mode,
+            splashColor: yellowColor,
+          ),
+          // IconInkwellButton(
+          //   onTap: () => {},
+          //   icon: Icons.dark_mode,
+          //   splashColor: blueColor,
+          // ),
+          const Expanded(child: SizedBox()),
+          Row(
+            children: <Widget>[
+              InkwellButton(
+                onTap: () => {},
+                title: 'Request Assistance',
+                icon: Icons.help,
+              ),
+              const SizedBox(width: 10),
+              InkwellButton(
+                onTap: () => {},
+                title: 'Pay Now',
+                icon: Icons.payment,
+              ),
+            ],
           ),
           // Row(
           //   children: [

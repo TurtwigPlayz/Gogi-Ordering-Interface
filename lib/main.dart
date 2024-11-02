@@ -25,15 +25,10 @@ class MainApp extends StatelessWidget {
     final session = Provider.of<SessionProvider>(context, listen: false);
 
     // Some hardcoded menu items
-    const MenuItemModel porkBelly = MenuItemModel(
-      name: 'Pork Belly',
-      unitPrice: 12.99
-    );
+    const MenuItemModel porkBelly =
+        MenuItemModel(name: 'Pork Belly', unitPrice: 12.99);
 
-    const MenuItemModel kimchi = MenuItemModel(
-      name: 'Kimchi',
-      unitPrice: 4.99
-    );
+    const MenuItemModel kimchi = MenuItemModel(name: 'Kimchi', unitPrice: 4.99);
 
     // Defer adding items to order for testing
     Future.delayed(const Duration(seconds: 1), () {
@@ -56,9 +51,9 @@ class MainApp extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: <Widget>[
-                    TopBar(), 
+                    TopBar(),
                     Expanded(
-                      child: MenuPage(), 
+                      child: MenuPage(),
                     ),
                     BottomBar(),
                   ],

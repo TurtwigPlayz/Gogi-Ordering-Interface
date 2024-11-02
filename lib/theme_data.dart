@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 const Color redColor = Color(0xFFE53935);
 const Color greenColor = Color.fromARGB(255, 30, 158, 37);
 const Color blueColor = Color.fromARGB(255, 84, 104, 239);
+const Color yellowColor = Color.fromARGB(255, 255, 221, 0);
 
 final String? fontFamily = GoogleFonts.ubuntu().fontFamily;
 
@@ -16,9 +17,7 @@ final ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xFF1A1A1A),
   ),
-  iconTheme: const IconThemeData(
-    color: Color(0xFFFAFAFA)
-  ),
+  iconTheme: const IconThemeData(color: Color(0xFFFAFAFA)),
   textTheme: TextTheme(
     bodyMedium: TextStyle(
       color: const Color(0xFFFAFAFA),
@@ -40,9 +39,7 @@ final ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xFFFAFAFA),
   ),
-  iconTheme: const IconThemeData(
-    color: Color(0xFF121212)
-  ),
+  iconTheme: const IconThemeData(color: Color(0xFF121212)),
   textTheme: TextTheme(
     bodyMedium: TextStyle(
       color: const Color(0xFF121212),
