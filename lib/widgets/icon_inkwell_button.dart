@@ -19,7 +19,7 @@ class IconInkwellButton extends StatelessWidget {
     const double iconPadding = 7.0;
 
     return InkwellButton(
-      onTap: () => {},
+      onTap: onTap,
       icon: icon,
       splashColor: splashColor,
       borderRadius: iconBorderRadius,

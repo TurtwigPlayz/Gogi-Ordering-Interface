@@ -5,12 +5,11 @@ class MenuItemModel {
     int defaultUnits = 1,
     List<String> categories = const <String>[],
     Map<String, bool> defaultOptions = const <String, bool>{},
-  }) :
-    _name = name,
-    _unitPrice = unitPrice,
-    _defaultUnits = defaultUnits,
-    _categories = categories,
-    _defaultOptions = defaultOptions;
+  })  : _name = name,
+        _unitPrice = unitPrice,
+        _defaultUnits = defaultUnits,
+        _categories = categories,
+        _defaultOptions = defaultOptions;
 
   final String _name;
   final double _unitPrice;

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/logo.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -26,15 +30,13 @@ class BottomBar extends StatelessWidget {
           const Logo(),
           const SizedBox(width: 7.0),
           IconInkwellButton(
-            onTap: () => {},
-            icon: Icons.light_mode,
-            splashColor: yellowColor,
+            onTap: () => theme.toggleTheme(),
+            icon: theme.themeMode == ThemeMode.dark
+                ? Icons.light_mode
+                : Icons.dark_mode,
+            splashColor:
+                theme.themeMode == ThemeMode.dark ? yellowColor : blueColor,
           ),
-          // IconInkwellButton(
-          //   onTap: () => {},
-          //   icon: Icons.dark_mode,
-          //   splashColor: blueColor,
-          // ),
           const Expanded(child: SizedBox()),
           Row(
             children: <Widget>[

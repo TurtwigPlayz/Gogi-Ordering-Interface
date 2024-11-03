@@ -27,7 +27,7 @@ class _OrderPanelState extends State<OrderPanel> {
       children: <Widget>[
         Expanded(
           child: Material(
-            color: Theme.of(context).shadowColor,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(10.0),
             child: Padding(
               padding: const EdgeInsets.all(10.0),

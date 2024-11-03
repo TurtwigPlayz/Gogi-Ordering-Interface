@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/models/menu_item_model.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
@@ -10,8 +11,11 @@ import 'package:gogi_ordering_interface/widgets/top_bar.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (BuildContext context) => SessionProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SessionProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
       child: const MainApp(),
     ),
   );
@@ -37,30 +41,32 @@ class MainApp extends StatelessWidget {
       session.addToOrder(kimchi);
     });
 
-    return MaterialApp(
-      title: 'Gogi Ordering Interface',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
-      home: const DefaultTabController(
-        length: 5, // Number of tabs
-        child: Scaffold(
-          body: Row(
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    TopBar(),
-                    Expanded(
-                      child: MenuPage(),
-                    ),
-                    BottomBar(),
-                  ],
+    return Consumer<ThemeProvider>(
+      builder: (context, theme, child) => MaterialApp(
+        title: 'Gogi Ordering Interface',
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: theme.themeMode,
+        home: const DefaultTabController(
+          length: 5, // Number of tabs
+          child: Scaffold(
+            body: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      TopBar(),
+                      Expanded(
+                        child: MenuPage(),
+                      ),
+                      BottomBar(),
+                    ],
+                  ),
                 ),
-              ),
-              OrderPanel(),
-            ],
+                OrderPanel(),
+              ],
+            ),
           ),
         ),
       ),
