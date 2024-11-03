@@ -22,7 +22,8 @@ class InkwellButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = splashColor != null ? splashColor! : Theme.of(context).iconTheme.color!;
+    final color =
+        splashColor != null ? splashColor! : Theme.of(context).iconTheme.color!;
 
     return Material(
       color: Theme.of(context).shadowColor,
@@ -34,19 +35,22 @@ class InkwellButton extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(padding),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (icon != null) Icon(
-                icon,
-                size: iconSize,
-                color: color,
-              ),
+              if (icon != null)
+                Icon(
+                  icon,
+                  size: iconSize,
+                  color: color,
+                ),
               if (title != null) ...<Widget>[
                 const SizedBox(width: 10.0),
                 Text(
                   title!,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: color
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: color),
                 ),
               ],
             ],

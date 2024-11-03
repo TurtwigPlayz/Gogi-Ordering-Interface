@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/widgets/modals/confirmation_modal.dart';
+import 'package:gogi_ordering_interface/widgets/modals/message_modal.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
@@ -112,7 +114,24 @@ class _OrderPanelState extends State<OrderPanel> {
                 ),
               const SizedBox(height: 10.0),
               InkwellButton(
-                onTap: () => {},
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => ConfirmationModal(
+                    title: 'Order Confirmation',
+                    message:
+                        'Are you sure you want to place this order? This action cannot be undone.',
+                    onConfirm: () => {
+                      session.moveOrderToHistory(),
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const MessageModal(
+                          message:
+                              'Your order has been placed. A waiter will be with you soon.',
+                        ),
+                      ),
+                    },
+                  ),
+                ),
                 title: 'Order Now',
                 icon: Icons.shopping_cart_checkout,
               ),

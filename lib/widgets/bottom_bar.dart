@@ -4,6 +4,7 @@ import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/logo.dart';
+import 'package:gogi_ordering_interface/widgets/modals/message_modal.dart';
 import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
@@ -41,7 +42,13 @@ class BottomBar extends StatelessWidget {
           Row(
             children: <Widget>[
               InkwellButton(
-                onTap: () => {},
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => const MessageModal(
+                    message:
+                        "Your request has been sent. A waiter will be with you soon.",
+                  ),
+                ),
                 title: 'Request Assistance',
                 icon: Icons.help,
               ),
