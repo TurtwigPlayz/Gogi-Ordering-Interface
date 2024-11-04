@@ -49,6 +49,23 @@ class _OrderPanelState extends State<OrderPanel> {
     );
   }
 
+  Widget _buildEmptyListMessage(
+      BuildContext context, String message, IconData icon) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const SizedBox(height: 20.0),
+        Icon(icon, size: 50.0, color: Theme.of(context).cardColor),
+        const SizedBox(height: 10.0),
+        Text(message,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).cardColor,
+                  fontSize: 17.0,
+                )),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     const double itemSpacing = 10.0;
@@ -70,15 +87,21 @@ class _OrderPanelState extends State<OrderPanel> {
                   child: Column(
                     children: <Widget>[
                       if (!_isViewingOrderHistory)
-                        ...session.currentOrder.values.expand((item) {
-                          return <Widget>[
-                            OrderItem(model: item),
-                            const SizedBox(
-                                height:
-                                    itemSpacing), // Adjust the height as needed
-                          ];
-                        })
-                      else
+                        if (session.currentOrder.values.isNotEmpty)
+                          ...session.currentOrder.values.expand((item) {
+                            return <Widget>[
+                              OrderItem(model: item),
+                              const SizedBox(
+                                  height:
+                                      itemSpacing), // Adjust the height as needed
+                            ];
+                          })
+                        else
+                          _buildEmptyListMessage(
+                              context,
+                              'Order is currently empty.',
+                              Icons.add_shopping_cart)
+                      else if (session.orderHistory.isNotEmpty)
                         ...session.orderHistory.expand((item) {
                           return <Widget>[
                             OrderItem(
@@ -89,7 +112,10 @@ class _OrderPanelState extends State<OrderPanel> {
                                 height:
                                     itemSpacing), // Adjust the height as needed
                           ];
-                        }),
+                        })
+                      else
+                        _buildEmptyListMessage(context, 'No orders placed yet.',
+                            Icons.shopping_cart_outlined),
                     ],
                   ),
                 ),
