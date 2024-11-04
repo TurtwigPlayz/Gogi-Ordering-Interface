@@ -1,95 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/widgets/menu_item.dart';
+import 'package:gogi_ordering_interface/providers/session_provider.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final session = Provider.of<SessionProvider>(context, listen: false);
+
+    const double spacing = 12.0;
+
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: TabBarView(
-        children: List.generate(5, (index) => _buildMenuPageMaker(context)),
-      ),
-    );
-  }
-}
-
-class MenuItem extends StatelessWidget {
-  final String imagePath;
-  final String name;
-  final String price;
-
-  const MenuItem({
-    required this.imagePath,
-    required this.name,
-    required this.price,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
+      child: Padding(
+        padding: const EdgeInsets.all(spacing),
+        child: TabBarView(
+          children: <Widget>[
+            ...['All', ...session.menuCategories].map(
+              (category) => GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount:
+                      (MediaQuery.of(context).size.width / 260).floor(),
+                  mainAxisSpacing: spacing,
+                  crossAxisSpacing: spacing,
+                  childAspectRatio: 0.75,
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(name, style: const TextStyle(fontSize: 16.0)),
-                  Text(price, style: const TextStyle(fontSize: 16.0)),
-                ],
+                itemCount: session.menuItems.where((menuItem) {
+                  return category == 'All' ||
+                      menuItem.categories.contains(category);
+                }).length,
+                itemBuilder: (context, index) {
+                  final filteredItems = session.menuItems.where((menuItem) {
+                    return category == 'All' ||
+                        menuItem.categories.contains(category);
+                  }).toList();
+
+                  final menuItem = filteredItems[index];
+
+                  return MenuItem(
+                    imagePath: menuItem.imagePath,
+                    name: menuItem.name,
+                    price: '\$${menuItem.unitPrice.toStringAsFixed(2)}',
+                  );
+                },
               ),
             ),
           ],
         ),
-        Positioned(
-          top: 8,
-          right: 8,
-          child: CircleAvatar(
-            backgroundColor: Colors.white,
-            child: IconButton(
-              icon: const Icon(Icons.add, color: Colors.green),
-              onPressed: () {
-                // Add your onPressed logic here
-              },
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
-}
-
-Widget _buildMenuPageMaker(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // 2 items per row
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
-        childAspectRatio: 0.75,
-      ),
-      itemCount: 4, // 4 items per page
-      itemBuilder: (context, index) {
-        return MenuItem(
-          imagePath: 'lib/images/food_item_$index.png', // Sample image path
-          name: 'Food Item $index', // Replace with actual item name
-          price: '\$${(10 + index * 2).toStringAsFixed(2)}', // Sample price
-        );
-      },
-    ),
-  );
 }

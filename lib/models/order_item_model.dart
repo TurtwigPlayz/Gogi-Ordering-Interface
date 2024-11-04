@@ -6,10 +6,9 @@ class OrderItemModel {
     required MenuItemModel menuItem,
     required int quantity,
     required Map<String, bool> options,
-  }) :
-    _options = options,
-    _quantity = quantity,
-    _menuItem = menuItem;
+  })  : _options = options,
+        _quantity = quantity,
+        _menuItem = menuItem;
 
   final MenuItemModel _menuItem;
   int _quantity;

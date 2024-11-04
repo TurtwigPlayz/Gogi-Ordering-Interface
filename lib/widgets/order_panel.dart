@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/widgets/modals/confirmation_modal.dart';
+import 'package:gogi_ordering_interface/widgets/modals/message_modal.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
@@ -27,26 +29,39 @@ class _OrderPanelState extends State<OrderPanel> {
       children: <Widget>[
         Expanded(
           child: Material(
-            color: Theme.of(context).shadowColor,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(10.0),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: <Widget>[
-                  Text(
-                    text,
-                    style: Theme.of(context).textTheme.bodySmall
-                  ),
+                  Text(text, style: Theme.of(context).textTheme.bodySmall),
                   const Expanded(child: SizedBox()),
                   TaggedText(
-                    text: '\$${cost.toStringAsPrecision(3)}',
-                    backgroundColor: greenColor
-                  ),
+                      text: '\$${cost.toStringAsPrecision(3)}',
+                      backgroundColor: greenColor),
                 ],
               ),
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildEmptyListMessage(
+      BuildContext context, String message, IconData icon) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const SizedBox(height: 20.0),
+        Icon(icon, size: 50.0, color: Theme.of(context).cardColor),
+        const SizedBox(height: 10.0),
+        Text(message,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).cardColor,
+                  fontSize: 17.0,
+                )),
       ],
     );
   }
@@ -58,10 +73,7 @@ class _OrderPanelState extends State<OrderPanel> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(
-            color: Theme.of(context).cardColor,
-            width: 1
-          ),
+          left: BorderSide(color: Theme.of(context).cardColor, width: 1),
         ),
       ),
       width: 300.0,
@@ -70,47 +82,82 @@ class _OrderPanelState extends State<OrderPanel> {
         child: Consumer<SessionProvider>(
           builder: (context, session, child) => Column(
             children: <Widget>[
-              if (!_isViewingOrderHistory) InkwellButton(
-                onTap: () => _toggleView(),
-                title: 'Order History',
-                icon: Icons.history,
-              )
-              else InkwellButton(
-                onTap: () => _toggleView(),
-                title: 'Back To Order',
-                icon: Icons.arrow_back,
-              ),
-              const SizedBox(height: 20.0),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      if (!_isViewingOrderHistory) ...session.currentOrder.values.expand((item) {
-                        return <Widget>[
-                          OrderItem(model: item),
-                          const SizedBox(height: itemSpacing), // Adjust the height as needed
-                        ];
-                      })
-                      else ...session.orderHistory.expand((item) {
-                        return <Widget>[
-                          OrderItem(
-                            model: item,
-                            isHistorical: true,
-                          ),
-                          const SizedBox(height: itemSpacing), // Adjust the height as needed
-                        ];
-                      }),
+                      if (!_isViewingOrderHistory)
+                        if (session.currentOrder.values.isNotEmpty)
+                          ...session.currentOrder.values.expand((item) {
+                            return <Widget>[
+                              OrderItem(model: item),
+                              const SizedBox(
+                                  height:
+                                      itemSpacing), // Adjust the height as needed
+                            ];
+                          })
+                        else
+                          _buildEmptyListMessage(
+                              context,
+                              'Order is currently empty.',
+                              Icons.add_shopping_cart)
+                      else if (session.orderHistory.isNotEmpty)
+                        ...session.orderHistory.expand((item) {
+                          return <Widget>[
+                            OrderItem(
+                              model: item,
+                              isHistorical: true,
+                            ),
+                            const SizedBox(
+                                height:
+                                    itemSpacing), // Adjust the height as needed
+                          ];
+                        })
+                      else
+                        _buildEmptyListMessage(context, 'No orders placed yet.',
+                            Icons.shopping_cart_outlined),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 20.0),
               _buildTotalCostTag(context, 'Order Cost', session.orderTotalCost),
-              const SizedBox(height: 7.0),
-              _buildTotalCostTag(context, 'Current Cost', session.currentTotalCost),
-              const SizedBox(height: 15.0),
+              const SizedBox(height: 10.0),
+              _buildTotalCostTag(
+                  context, 'Current Cost', session.currentTotalCost),
+              const SizedBox(height: 20.0),
+              if (!_isViewingOrderHistory)
+                InkwellButton(
+                  onTap: () => _toggleView(),
+                  title: 'Order History',
+                  icon: Icons.history,
+                )
+              else
+                InkwellButton(
+                  onTap: () => _toggleView(),
+                  title: 'Back To Order',
+                  icon: Icons.arrow_back,
+                ),
+              const SizedBox(height: 10.0),
               InkwellButton(
-                onTap: () => {},
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => ConfirmationModal(
+                    title: 'Order Confirmation',
+                    message:
+                        'Are you sure you want to place this order? This action cannot be undone.',
+                    onConfirm: () => {
+                      session.moveOrderToHistory(),
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const MessageModal(
+                          message:
+                              'Your order has been placed. A waiter will be with you soon.',
+                        ),
+                      ),
+                    },
+                  ),
+                ),
                 title: 'Order Now',
                 icon: Icons.shopping_cart_checkout,
               ),
