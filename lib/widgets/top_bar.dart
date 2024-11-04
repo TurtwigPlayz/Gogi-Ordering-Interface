@@ -14,9 +14,13 @@ class TopBar extends StatelessWidget {
       child: TabBar(
         labelColor: Theme.of(context).textTheme.bodyMedium!.color,
         indicatorColor: Theme.of(context).textTheme.bodyMedium!.color,
-        unselectedLabelColor: Theme.of(context).cardColor,
+        unselectedLabelColor:
+            Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.7),
         dividerColor: Theme.of(context).cardColor,
         dividerHeight: 1,
+        labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 17,
+            ),
         tabs: <Widget>[
           ...['All', ...session.menuCategories].map(
             (category) => Tab(text: category),

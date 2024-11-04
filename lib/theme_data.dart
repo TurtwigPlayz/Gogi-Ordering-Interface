@@ -10,8 +10,8 @@ final String? fontFamily = GoogleFonts.ubuntu().fontFamily;
 
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  cardColor: const Color(0xFF3C3C3C),
-  shadowColor: const Color(0xFF2A2A2A),
+  cardColor: const Color(0xFF4F4F4F),
+  shadowColor: const Color(0xFF323232),
   scaffoldBackgroundColor: const Color(0xFF121212),
   dialogBackgroundColor: const Color(0xFF121212),
   appBarTheme: const AppBarTheme(
@@ -32,10 +32,10 @@ final ThemeData darkTheme = ThemeData(
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  cardColor: const Color(0xFFF1F1F1),
-  shadowColor: const Color(0xFFE8E8E8),
-  scaffoldBackgroundColor: const Color(0xFFFAFAFA),
-  dialogBackgroundColor: const Color(0xFFFAFAFA),
+  cardColor: const Color(0xFFEFEFEF),
+  shadowColor: const Color(0xFFDBDBDB),
+  scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+  dialogBackgroundColor: const Color(0xFFFFFFFF),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xFFFAFAFA),
   ),
