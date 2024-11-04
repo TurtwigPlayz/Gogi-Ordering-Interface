@@ -10,28 +10,45 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final session = Provider.of<SessionProvider>(context, listen: false);
 
+    const double spacing = 12.0;
+
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: TabBarView(
-        children: <Widget>[
-          ...session.menuItems.map((menuItem) => GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // 2 items per row
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
+      child: Padding(
+        padding: const EdgeInsets.all(spacing),
+        child: TabBarView(
+          children: <Widget>[
+            ...['All', ...session.menuCategories].map(
+              (category) => GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount:
+                      (MediaQuery.of(context).size.width / 260).floor(),
+                  mainAxisSpacing: spacing,
+                  crossAxisSpacing: spacing,
                   childAspectRatio: 0.75,
                 ),
-                itemCount: 4, // 4 items per page
+                itemCount: session.menuItems.where((menuItem) {
+                  return category == 'All' ||
+                      menuItem.categories.contains(category);
+                }).length,
                 itemBuilder: (context, index) {
+                  final filteredItems = session.menuItems.where((menuItem) {
+                    return category == 'All' ||
+                        menuItem.categories.contains(category);
+                  }).toList();
+
+                  final menuItem = filteredItems[index];
+
                   return MenuItem(
-                    imagePath: menuItem.imagePath, // Sample image path
-                    name: menuItem.name, // Replace with actual item name
-                    price:
-                        '\$${menuItem.unitPrice.toStringAsFixed(2)}', // Sample price
+                    imagePath: menuItem.imagePath,
+                    name: menuItem.name,
+                    price: '\$${menuItem.unitPrice.toStringAsFixed(2)}',
                   );
                 },
-              ))
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

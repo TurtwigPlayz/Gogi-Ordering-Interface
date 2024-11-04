@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/logo.dart';
 import 'package:gogi_ordering_interface/widgets/modals/message_modal.dart';
-import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -60,71 +60,6 @@ class BottomBar extends StatelessWidget {
               ),
             ],
           ),
-          // Row(
-          //   children: [
-          //     ElevatedButton(
-          //       onPressed: () {
-          //         // Open the pop-up dialog
-          //         showDialog(
-          //           context: context,
-          //           builder: (BuildContext context) {
-          //             return AlertDialog(
-          //               title: const Text('Request Assistance'),
-          //               content: const Text('A waiter will be with you soon'),
-          //               actions: [
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop(); // Close the dialog
-          //                   },
-          //                   child: const Text('Cancel'),
-          //                 ),
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop(); // Close the dialog
-          //                   },
-          //                   child: const Text('Confirm'),
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         );
-          //       },
-          //       child: const Text('Request Assistance'),
-          //       style: ElevatedButton.styleFrom(),
-          //     ),
-          //     const SizedBox(width: 10), // Spacing between buttons
-          //     ElevatedButton(
-          //       onPressed: () {
-          //         // Open the pop-up dialog
-          //         showDialog(
-          //           context: context,
-          //           builder: (BuildContext context) {
-          //             return AlertDialog(
-          //               title: const Text('Request Assistance'),
-          //               content: const Text('A waiter will be with you soon'),
-          //               actions: [
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop(); // Close the dialog
-          //                   },
-          //                   child: const Text('Cancel'),
-          //                 ),
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop(); // Close the dialog
-          //                   },
-          //                   child: const Text('Confirm'),
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         );
-          //       },
-          //       child: const Text('Pay Now'),
-          //       style: ElevatedButton.styleFrom(),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:gogi_ordering_interface/models/menu_item_model.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
@@ -15,18 +15,29 @@ void main() {
       name: 'Pork Belly',
       unitPrice: 12.99,
       imagePath: 'images/menu/pork_belly.jpg',
+      categories: <String>['Entrees'],
     ),
     MenuItemModel(
       name: 'Kimchi',
       unitPrice: 4.99,
       imagePath: 'images/menu/kimchi.jpg',
+      categories: <String>['Sides'],
     ),
+  ];
+
+  const menuCategories = <String>[
+    'Appetizers',
+    'Entrees',
+    'Sides',
+    'Drinks',
   ];
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SessionProvider(menuItems)),
+        ChangeNotifierProvider(
+          create: (context) => SessionProvider(menuItems, menuCategories),
+        ),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: const MainApp(),

@@ -7,19 +7,24 @@ class SessionProvider extends ChangeNotifier {
     required Map<MenuItemModel, OrderItemModel> currentOrder,
     required List<OrderItemModel> orderHistory,
     required List<MenuItemModel> menuItems,
+    required List<String> menuCategories,
   })  : _currentOrder = currentOrder,
         _orderHistory = orderHistory,
-        _menuItems = menuItems;
+        _menuItems = menuItems,
+        _menuCategories = menuCategories;
 
   final Map<MenuItemModel, OrderItemModel> _currentOrder;
   final List<OrderItemModel> _orderHistory;
   final List<MenuItemModel> _menuItems;
+  final List<String> _menuCategories;
 
-  factory SessionProvider(List<MenuItemModel> menuItems) {
+  factory SessionProvider(
+      List<MenuItemModel> menuItems, List<String> menuCategories) {
     return SessionProvider._internalConstructor(
       currentOrder: {},
       orderHistory: [],
       menuItems: menuItems,
+      menuCategories: menuCategories,
     );
   }
 
@@ -50,6 +55,7 @@ class SessionProvider extends ChangeNotifier {
       Map.unmodifiable(_currentOrder);
   List<OrderItemModel> get orderHistory => List.unmodifiable(_orderHistory);
   List<MenuItemModel> get menuItems => List.unmodifiable(_menuItems);
+  List<String> get menuCategories => List.unmodifiable(_menuCategories);
 
   double get orderTotalCost =>
       _currentOrder.values.fold(0, (acc, orderItem) => acc + orderItem.cost);
