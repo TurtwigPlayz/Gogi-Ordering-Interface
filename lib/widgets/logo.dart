@@ -27,7 +27,7 @@ class Logo extends StatelessWidget {
                 0, 0, 0, 1, 0, // Alpha
               ]),
         child: Image.asset(
-          'lib/images/logo.png',
+          'images/logo.png',
           height: 65,
         ),
       ),

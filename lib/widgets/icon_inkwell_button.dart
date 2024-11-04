@@ -7,11 +7,13 @@ class IconInkwellButton extends StatelessWidget {
     required this.onTap,
     required this.icon,
     this.splashColor,
+    this.iconSize = 20,
   });
 
   final VoidCallback onTap;
   final IconData icon;
   final Color? splashColor;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class IconInkwellButton extends StatelessWidget {
       splashColor: splashColor,
       borderRadius: iconBorderRadius,
       padding: iconPadding,
+      iconSize: iconSize,
     );
   }
 }

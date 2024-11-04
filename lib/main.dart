@@ -10,10 +10,23 @@ import 'package:gogi_ordering_interface/widgets/order_panel.dart';
 import 'package:gogi_ordering_interface/widgets/top_bar.dart';
 
 void main() {
+  const menuItems = <MenuItemModel>[
+    MenuItemModel(
+      name: 'Pork Belly',
+      unitPrice: 12.99,
+      imagePath: 'images/menu/pork_belly.jpg',
+    ),
+    MenuItemModel(
+      name: 'Kimchi',
+      unitPrice: 4.99,
+      imagePath: 'images/menu/kimchi.jpg',
+    ),
+  ];
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SessionProvider()),
+        ChangeNotifierProvider(create: (context) => SessionProvider(menuItems)),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: const MainApp(),
@@ -28,17 +41,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final session = Provider.of<SessionProvider>(context, listen: false);
 
-    // Some hardcoded menu items
-    const MenuItemModel porkBelly =
-        MenuItemModel(name: 'Pork Belly', unitPrice: 12.99);
-
-    const MenuItemModel kimchi = MenuItemModel(name: 'Kimchi', unitPrice: 4.99);
-
     // Defer adding items to order for testing
     Future.delayed(const Duration(seconds: 1), () {
-      session.addToOrder(porkBelly);
-      session.addToOrder(kimchi);
-      session.addToOrder(kimchi);
+      session.addToOrder(session.menuItems[0]);
+      session.addToOrder(session.menuItems[1]);
+      session.addToOrder(session.menuItems[1]);
     });
 
     return Consumer<ThemeProvider>(
