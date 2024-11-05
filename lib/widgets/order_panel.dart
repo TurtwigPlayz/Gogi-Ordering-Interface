@@ -142,6 +142,7 @@ class _OrderPanelState extends State<OrderPanel> {
               InkwellButton(
                 onTap: () => showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (BuildContext context) => ConfirmationModal(
                     title: 'Order Confirmation',
                     message:
@@ -150,6 +151,7 @@ class _OrderPanelState extends State<OrderPanel> {
                       session.moveOrderToHistory(),
                       showDialog(
                         context: context,
+                        barrierDismissible: false,
                         builder: (BuildContext context) => const MessageModal(
                           message:
                               'Your order has been placed. A waiter will be with you soon.',

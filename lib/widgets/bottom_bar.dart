@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/widgets/modals/locked_modal.dart';
 import 'package:gogi_ordering_interface/widgets/modals/confirmation_modal.dart';
 import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
@@ -45,6 +46,7 @@ class BottomBar extends StatelessWidget {
               InkwellButton(
                 onTap: () => showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (BuildContext context) => const MessageModal(
                     message:
                         "Your request has been sent. A waiter will be with you soon.",
@@ -57,13 +59,15 @@ class BottomBar extends StatelessWidget {
               InkwellButton(
                 onTap: () => showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (BuildContext context) => ConfirmationModal(
                     title: 'Payment Confirmation',
                     message:
                         'Are you sure you are ready to pay for your order?',
                     onConfirm: () => showDialog(
                       context: context,
-                      builder: (BuildContext context) => const MessageModal(
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => const LockedModal(
                         message:
                             'A waiter will be with you shortly to process your payment.',
                       ),
