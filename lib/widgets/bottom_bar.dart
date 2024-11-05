@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:gogi_ordering_interface/widgets/modals/confirmation_modal.dart';
 import 'package:gogi_ordering_interface/providers/theme_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
@@ -54,7 +55,21 @@ class BottomBar extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               InkwellButton(
-                onTap: () => {},
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => ConfirmationModal(
+                    title: 'Payment Confirmation',
+                    message:
+                        'Are you sure you are ready to pay for your order?',
+                    onConfirm: () => showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const MessageModal(
+                        message:
+                            'A waiter will be with you shortly to process your payment.',
+                      ),
+                    ),
+                  ),
+                ),
                 title: 'Pay Now',
                 icon: Icons.payment,
               ),
