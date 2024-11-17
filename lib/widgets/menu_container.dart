@@ -43,6 +43,7 @@ class MenuPage extends StatelessWidget {
                     imagePath: menuItem.imagePath,
                     name: menuItem.name,
                     price: '\$${menuItem.unitPrice.toStringAsFixed(2)}',
+                    description: menuItem.description,
                   );
                 },
               ),
