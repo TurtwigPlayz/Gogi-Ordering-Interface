@@ -1,9 +1,6 @@
-// menu_item_detail_page.dart
 import 'package:flutter/material.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
-import 'package:gogi_ordering_interface/providers/session_provider.dart';
-import 'package:provider/provider.dart';
 
 class MenuItemDetail extends StatefulWidget {
   final String imagePath;
@@ -32,11 +29,13 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final session = Provider.of<SessionProvider>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        title: Text(
+          widget.name,
+          style:
+              Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 20.0),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -55,7 +54,10 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
             const SizedBox(height: 16.0),
             Text(
               widget.name,
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(fontSize: 18.0),
             ),
             const SizedBox(height: 8.0),
             TaggedText(
@@ -65,7 +67,7 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
             const SizedBox(height: 16.0),
             Text(
               widget.description,
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 24.0),
 
@@ -79,7 +81,8 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
               items: spiceLevels.map((size) {
                 return DropdownMenuItem(
                   value: size,
-                  child: Text(size),
+                  child:
+                      Text(size, style: Theme.of(context).textTheme.bodyMedium),
                 );
               }).toList(),
               onChanged: (newValue) {
@@ -93,7 +96,10 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
 
             // Toppings/Extras Options
             CheckboxListTile(
-              title: const Text("Extra Cheese"),
+              title: Text(
+                "Extra Cheese",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               value: extraCheese,
               onChanged: (value) {
                 setState(() {
@@ -102,7 +108,10 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
               },
             ),
             CheckboxListTile(
-              title: const Text("Add Sauce"),
+              title: Text(
+                "Add Sauce",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               value: addSauce,
               onChanged: (value) {
                 setState(() {
@@ -117,7 +126,10 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Quantity"),
+                Text(
+                  "Quantity",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 Row(
                   children: [
                     IconButton(
@@ -160,7 +172,10 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
                 // );
                 Navigator.pop(context); // Return to the previous page
               },
-              child: const Text("Add to Order"),
+              child: Text(
+                "Add to Order",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
           ],
         ),
