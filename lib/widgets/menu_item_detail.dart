@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
+import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
 
 class MenuItemDetail extends StatefulWidget {
@@ -17,15 +18,38 @@ class MenuItemDetail extends StatefulWidget {
   });
 
   @override
-  _MenuItemDetailState createState() => _MenuItemDetailState();
+  MenuItemDetailState createState() => MenuItemDetailState();
 }
 
-class _MenuItemDetailState extends State<MenuItemDetail> {
+class MenuItemDetailState extends State<MenuItemDetail> {
+  final double borderRadius = 12.0;
+
   int quantity = 1;
   String selectedSpiceLevel = 'Medium';
   final List<String> spiceLevels = ['Mild', 'Medium', 'Hot'];
   bool extraCheese = false;
   bool addSauce = false;
+
+  Widget _buildCustomizationOption(
+      String title, bool value, Function(bool?) onChanged) {
+    return CheckboxListTile(
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+      value: value,
+      onChanged: onChanged,
+      fillColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            return greenColor;
+          }
+          return null;
+        },
+      ),
+      checkColor: Colors.white,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +84,12 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
                   .copyWith(fontSize: 18.0),
             ),
             const SizedBox(height: 8.0),
-            TaggedText(
-              text: widget.price,
-              backgroundColor: greenColor,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TaggedText(
+                text: widget.price,
+                backgroundColor: greenColor,
+              ),
             ),
             const SizedBox(height: 16.0),
             Text(
@@ -77,12 +104,16 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             DropdownButton<String>(
+              borderRadius: BorderRadius.circular(borderRadius),
               value: selectedSpiceLevel,
               items: spiceLevels.map((size) {
                 return DropdownMenuItem(
                   value: size,
-                  child:
-                      Text(size, style: Theme.of(context).textTheme.bodyMedium),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(size,
+                        style: Theme.of(context).textTheme.bodyMedium),
+                  ),
                 );
               }).toList(),
               onChanged: (newValue) {
@@ -91,38 +122,27 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
                 });
               },
             ),
-
             const SizedBox(height: 16.0),
-
             // Toppings/Extras Options
-            CheckboxListTile(
-              title: Text(
-                "Extra Cheese",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              value: extraCheese,
-              onChanged: (value) {
+            _buildCustomizationOption(
+              'Extra Cheese',
+              extraCheese,
+              (value) {
                 setState(() {
                   extraCheese = value!;
                 });
               },
             ),
-            CheckboxListTile(
-              title: Text(
-                "Add Sauce",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              value: addSauce,
-              onChanged: (value) {
+            _buildCustomizationOption(
+              'Add Sauce',
+              addSauce,
+              (value) {
                 setState(() {
                   addSauce = value!;
                 });
               },
             ),
-
             const SizedBox(height: 16.0),
-
-            // Quantity Selector
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -155,10 +175,9 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
                 ),
               ],
             ),
-
             const Spacer(),
-            ElevatedButton(
-              onPressed: () {
+            InkwellButton(
+              onTap: () {
                 // Add item to order with customizations
                 // session.addItemToOrder(
                 //   widget.name,
@@ -172,10 +191,7 @@ class _MenuItemDetailState extends State<MenuItemDetail> {
                 // );
                 Navigator.pop(context); // Return to the previous page
               },
-              child: Text(
-                "Add to Order",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              title: "Add to Order",
             ),
           ],
         ),
