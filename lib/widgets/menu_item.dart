@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gogi_ordering_interface/models/menu_item_model.dart';
+import 'package:gogi_ordering_interface/models/order_item_model.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
 import 'package:gogi_ordering_interface/widgets/menu_item_detail.dart';
 
 class MenuItem extends StatelessWidget {
-  final String imagePath;
-  final String name;
-  final String price;
-  final String description;
+  final MenuItemModel menuItem;
 
   const MenuItem({
-    required this.imagePath,
-    required this.name,
-    required this.price,
-    required this.description,
+    required this.menuItem,
     super.key,
   });
 
@@ -31,7 +27,7 @@ class MenuItem extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     Image.asset(
-                      imagePath,
+                      menuItem.imagePath,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
@@ -49,12 +45,12 @@ class MenuItem extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Text(
-                              name,
+                              menuItem.name,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             const SizedBox(width: 10.0),
                             TaggedText(
-                              text: price,
+                              text: menuItem.unitPrice.toStringAsFixed(2),
                               backgroundColor: greenColor,
                             ),
                             const Expanded(child: SizedBox()),
@@ -71,10 +67,8 @@ class MenuItem extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => MenuItemDetail(
-                                        imagePath: imagePath,
-                                        name: name,
-                                        price: price,
-                                        description: description,
+                                        orderItem:
+                                            OrderItemModel(menuItem), // FOR NOW
                                       ),
                                     ),
                                   );

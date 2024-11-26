@@ -39,12 +39,7 @@ class MenuPage extends StatelessWidget {
 
                   final menuItem = filteredItems[index];
 
-                  return MenuItem(
-                    imagePath: menuItem.imagePath,
-                    name: menuItem.name,
-                    price: '\$${menuItem.unitPrice.toStringAsFixed(2)}',
-                    description: menuItem.description,
-                  );
+                  return MenuItem(menuItem: menuItem);
                 },
               ),
             ),

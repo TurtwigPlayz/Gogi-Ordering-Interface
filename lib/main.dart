@@ -15,6 +15,10 @@ void main() {
         name: 'Pork Belly',
         unitPrice: 12.99,
         imagePath: 'images/menu/pork_belly.jpg',
+        dropdownOptions: <String, List<String>>{
+          'Cooking Style': <String>['Grilled', 'Fried', 'Roasted'],
+          'Sauce': <String>['Soy Garlic', 'Spicy', 'Sweet and Sour'],
+        },
         categories: <String>['Entrees'],
         description:
             "Succulent, tender pork belly slow-cooked to perfection, with a crispy, caramelized outer layer and a melt-in-your-mouth interior. Marinated in a savory blend of soy sauce, garlic, and spices, each bite bursts with rich, smoky flavors. Served with a side of fresh vegetables or pickled radish to balance the richness, this dish is a comforting classic that's perfect for sharing or as a hearty main course. Enjoy it with a dipping sauce or wrapped in lettuce for a traditional experience."),
@@ -22,6 +26,13 @@ void main() {
         name: 'Kimchi',
         unitPrice: 4.99,
         imagePath: 'images/menu/kimchi.jpg',
+        dropdownOptions: <String, List<String>>{
+          'Fermentation Level': <String>['Fresh', 'Medium', 'Aged'],
+        },
+        defaultOptions: <String, bool>{
+          'Extra Garlic': false,
+          'Add Sesame Seeds': false,
+        },
         categories: <String>['Sides'],
         description:
             "A traditional Korean side dish made from fermented napa cabbage and radishes, seasoned with a bold blend of garlic, ginger, chili flakes, and fish sauce. Kimchi has a tangy, spicy flavor with a subtle hint of sweetness, offering a unique balance of flavors that complement many dishes. Known for its health benefits, including probiotics and essential vitamins, Kimchi adds a zesty kick to your meal. Enjoy it on its own or as a perfect side to rice, noodles, or grilled meats."),

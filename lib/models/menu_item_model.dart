@@ -6,7 +6,9 @@ class MenuItemModel {
   final String _description;
   final int _defaultUnits;
   final List<String> _categories;
+  final Map<String, List<String>> _dropdownOptions;
   final Map<String, bool> _defaultOptions;
+
   const MenuItemModel({
     required String name,
     required String imagePath,
@@ -15,20 +17,25 @@ class MenuItemModel {
     int defaultUnits = 1,
     List<String> categories = const <String>[],
     Map<String, bool> defaultOptions = const <String, bool>{},
+    Map<String, List<String>> dropdownOptions = const <String, List<String>>{},
   })  : _name = name,
         _imagePath = imagePath,
         _unitPrice = unitPrice,
         _description = description,
         _defaultUnits = defaultUnits,
         _categories = categories,
+        _dropdownOptions = dropdownOptions,
         _defaultOptions = defaultOptions;
 
   List<String> get categories => List.unmodifiable(_categories);
+  Map<String, List<String>> get dropdownOptions =>
+      Map.unmodifiable(_dropdownOptions);
   Map<String, bool> get defaultOptions => Map.unmodifiable(_defaultOptions);
+
   int get defaultUnits => _defaultUnits;
   String get description => _description;
   String get imagePath => _imagePath;
-  // Getters
+
   String get name => _name;
   double get unitPrice => _unitPrice;
 }
