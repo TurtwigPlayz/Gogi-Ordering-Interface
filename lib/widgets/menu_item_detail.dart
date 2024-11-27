@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/models/order_item_model.dart';
+import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
@@ -17,10 +19,11 @@ class MenuItemDetail extends StatefulWidget {
 }
 
 class MenuItemDetailState extends State<MenuItemDetail> {
-  final double borderRadius = 12.0;
-
   @override
   Widget build(BuildContext context) {
+    const double borderRadius = 12.0;
+    final session = Provider.of<SessionProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -160,17 +163,8 @@ class MenuItemDetailState extends State<MenuItemDetail> {
             const Spacer(),
             InkwellButton(
               onTap: () {
-                // Add item to order with customizations
-                // session.addItemToOrder(
-                //   widget.name,
-                //   widget.price,
-                //   quantity: quantity,
-                //   size: selectedSpiceLevel,
-                //   extras: {
-                //     'Extra Cheese': extraCheese,
-                //     'Add Sauce': addSauce,
-                //   },
-                // );
+                session.updateOrder(
+                    widget.orderItem, widget.orderItem.quantity);
                 Navigator.pop(context); // Return to the previous page
               },
               title: "Update Order",

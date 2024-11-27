@@ -38,6 +38,16 @@ class SessionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateOrder(OrderItemModel orderItem, int quantity) {
+    if (_currentOrder[orderItem.menuItem] != null) {
+      _currentOrder[orderItem.menuItem]!.quantity = quantity;
+    } else {
+      _currentOrder[orderItem.menuItem] = orderItem;
+    }
+
+    notifyListeners();
+  }
+
   void removeFromOrder(MenuItemModel menuItem) {
     _currentOrder.remove(menuItem);
 

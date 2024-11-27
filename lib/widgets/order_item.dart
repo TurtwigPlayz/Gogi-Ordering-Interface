@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
+import 'package:gogi_ordering_interface/widgets/menu_item_detail.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
 import 'package:gogi_ordering_interface/models/order_item_model.dart';
@@ -51,7 +52,14 @@ class OrderItem extends StatelessWidget {
             if (!isHistorical) ...<Widget>[
               const Expanded(child: SizedBox()),
               IconInkwellButton(
-                onTap: () => {},
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MenuItemDetail(
+                      orderItem: model,
+                    ),
+                  ),
+                ),
                 icon: Icons.edit,
               ),
               const SizedBox(width: 8.0),

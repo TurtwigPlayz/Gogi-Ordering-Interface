@@ -35,6 +35,10 @@ class OrderItemModel {
     _quantity = max(0, _quantity + amount);
   }
 
+  set quantity(int value) {
+    _quantity = value;
+  }
+
   factory OrderItemModel(MenuItemModel menuItem) {
     return OrderItemModel._internalConstructor(
       menuItem: menuItem,

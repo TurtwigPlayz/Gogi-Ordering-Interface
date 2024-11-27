@@ -62,17 +62,15 @@ class MenuItem extends StatelessWidget {
                                 0, 0, 0, 1, 0, // Alpha
                               ]),
                               child: IconInkwellButton(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MenuItemDetail(
-                                        orderItem:
-                                            OrderItemModel(menuItem), // FOR NOW
-                                      ),
+                                onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MenuItemDetail(
+                                      orderItem:
+                                          OrderItemModel(menuItem), // FOR NOW
                                     ),
-                                  );
-                                },
+                                  ),
+                                ),
                                 icon: Icons.add,
                                 iconSize: 22,
                               ),

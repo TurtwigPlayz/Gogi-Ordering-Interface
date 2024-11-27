@@ -57,11 +57,13 @@ class _OrderPanelState extends State<OrderPanel> {
         const SizedBox(height: 20.0),
         Icon(icon, size: 50.0, color: Theme.of(context).cardColor),
         const SizedBox(height: 10.0),
-        Text(message,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).cardColor,
-                  fontSize: 17.0,
-                )),
+        Text(
+          message,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).cardColor,
+                fontSize: 17.0,
+              ),
+        ),
       ],
     );
   }
@@ -92,8 +94,8 @@ class _OrderPanelState extends State<OrderPanel> {
                             return <Widget>[
                               OrderItem(model: item),
                               const SizedBox(
-                                  height:
-                                      itemSpacing), // Adjust the height as needed
+                                height: itemSpacing,
+                              ),
                             ];
                           })
                         else
@@ -102,15 +104,15 @@ class _OrderPanelState extends State<OrderPanel> {
                               'Order is currently empty.',
                               Icons.add_shopping_cart)
                       else if (session.orderHistory.isNotEmpty)
-                        ...session.orderHistory.expand((item) {
+                        ...session.orderHistory.reversed.expand((item) {
                           return <Widget>[
                             OrderItem(
                               model: item,
                               isHistorical: true,
                             ),
                             const SizedBox(
-                                height:
-                                    itemSpacing), // Adjust the height as needed
+                              height: itemSpacing,
+                            ),
                           ];
                         })
                       else
