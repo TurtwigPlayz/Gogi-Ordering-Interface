@@ -20,7 +20,6 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BorderRadius borderRadius = BorderRadius.circular(10.0);
-
     final session = Provider.of<SessionProvider>(context, listen: false);
 
     return Material(

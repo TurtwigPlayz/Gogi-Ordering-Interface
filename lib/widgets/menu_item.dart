@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/models/menu_item_model.dart';
 import 'package:gogi_ordering_interface/models/order_item_model.dart';
+import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/tagged_text.dart';
@@ -17,7 +19,7 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: <Widget>[
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -32,7 +34,6 @@ class MenuItem extends StatelessWidget {
                       width: double.infinity,
                       height: double.infinity,
                     ),
-                    // Add your overlay elements here
                     Positioned(
                       bottom: 0,
                       left: 0,
@@ -61,19 +62,27 @@ class MenuItem extends StatelessWidget {
                                 0, 0, -1, 0, 255, // Blue
                                 0, 0, 0, 1, 0, // Alpha
                               ]),
-                              child: IconInkwellButton(
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MenuItemDetail(
-                                      orderItem:
-                                          OrderItemModel(menuItem), // FOR NOW
+                              child: Consumer<SessionProvider>(
+                                  builder: (context, session, child) {
+                                return IconInkwellButton(
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MenuItemDetail(
+                                        orderItem: session.currentOrder
+                                                .containsKey(menuItem)
+                                            ? session.currentOrder[menuItem]!
+                                            : OrderItemModel(menuItem),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                icon: Icons.add,
-                                iconSize: 22,
-                              ),
+                                  icon:
+                                      session.currentOrder.containsKey(menuItem)
+                                          ? Icons.edit
+                                          : Icons.add,
+                                  iconSize: 22,
+                                );
+                              }),
                             )
                           ],
                         ),
