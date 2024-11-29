@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/widgets/modals/confirmation_modal.dart';
 import 'package:gogi_ordering_interface/widgets/modals/message_modal.dart';
-import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
@@ -105,24 +106,41 @@ class _OrderPanelState extends State<OrderPanel> {
                               Icons.add_shopping_cart)
                       else if (session.orderHistory.isNotEmpty)
                         ...session.orderHistory.reversed
-                            .expand((historicalItems) {
+                            .toList()
+                            .asMap()
+                            .entries
+                            .expand((entry) {
+                          final index = entry.key;
+                          final historicalItems = entry.value;
+                          final historicalDate = session
+                              .orderHistoryDates.reversed
+                              .toList()[index];
+                          final formattedTime =
+                              DateFormat('hh:mm a').format(historicalDate);
+
                           return <Widget>[
                             Row(
                               children: <Widget>[
-                                const Expanded(
+                                Expanded(
                                   child: Divider(
-                                    color: Colors.grey,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color,
                                     thickness: 1.0,
                                     endIndent: 8.0,
                                   ),
                                 ),
                                 Text(
-                                  "10:38 AM",
+                                  formattedTime,
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: Divider(
-                                    color: Colors.grey,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color,
                                     thickness: 1.0,
                                     indent: 8.0,
                                   ),
@@ -136,9 +154,9 @@ class _OrderPanelState extends State<OrderPanel> {
                                     isHistorical: true,
                                   ),
                                   const SizedBox(
-                                    height: itemSpacing,
+                                    height: 8.0,
                                   ),
-                                ])
+                                ]),
                           ];
                         })
                       else
