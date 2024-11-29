@@ -104,15 +104,41 @@ class _OrderPanelState extends State<OrderPanel> {
                               'Order is currently empty.',
                               Icons.add_shopping_cart)
                       else if (session.orderHistory.isNotEmpty)
-                        ...session.orderHistory.reversed.expand((item) {
+                        ...session.orderHistory.reversed
+                            .expand((historicalItems) {
                           return <Widget>[
-                            OrderItem(
-                              model: item,
-                              isHistorical: true,
+                            Row(
+                              children: <Widget>[
+                                const Expanded(
+                                  child: Divider(
+                                    color: Colors.grey,
+                                    thickness: 1.0,
+                                    endIndent: 8.0,
+                                  ),
+                                ),
+                                Text(
+                                  "10:38 AM",
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                const Expanded(
+                                  child: Divider(
+                                    color: Colors.grey,
+                                    thickness: 1.0,
+                                    indent: 8.0,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: itemSpacing,
-                            ),
+                            const SizedBox(height: 10.0),
+                            ...historicalItems.expand((item) => <Widget>[
+                                  OrderItem(
+                                    model: item,
+                                    isHistorical: true,
+                                  ),
+                                  const SizedBox(
+                                    height: itemSpacing,
+                                  ),
+                                ])
                           ];
                         })
                       else
