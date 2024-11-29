@@ -45,7 +45,8 @@ class OrderItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 5.0),
                 TaggedText(
-                    text: '\$${model.cost}', backgroundColor: greenColor),
+                    text: '\$${model.cost.toStringAsFixed(2)}',
+                    backgroundColor: greenColor),
               ],
             ),
             if (!isHistorical) ...<Widget>[

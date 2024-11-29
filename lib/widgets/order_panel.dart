@@ -38,7 +38,7 @@ class _OrderPanelState extends State<OrderPanel> {
                   Text(text, style: Theme.of(context).textTheme.bodySmall),
                   const Expanded(child: SizedBox()),
                   TaggedText(
-                      text: '\$${cost.toStringAsPrecision(3)}',
+                      text: '\$${cost.toStringAsFixed(2)}',
                       backgroundColor: greenColor),
                 ],
               ),
