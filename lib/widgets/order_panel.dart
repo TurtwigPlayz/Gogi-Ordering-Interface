@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/widgets/modals/confirmation_modal.dart';
 import 'package:gogi_ordering_interface/widgets/modals/message_modal.dart';
-import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/theme_data.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
 import 'package:gogi_ordering_interface/widgets/inkwell_button.dart';
@@ -104,15 +105,58 @@ class _OrderPanelState extends State<OrderPanel> {
                               'Order is currently empty.',
                               Icons.add_shopping_cart)
                       else if (session.orderHistory.isNotEmpty)
-                        ...session.orderHistory.reversed.expand((item) {
+                        ...session.orderHistory.reversed
+                            .toList()
+                            .asMap()
+                            .entries
+                            .expand((entry) {
+                          final index = entry.key;
+                          final historicalItems = entry.value;
+                          final historicalDate = session
+                              .orderHistoryDates.reversed
+                              .toList()[index];
+                          final formattedTime =
+                              DateFormat('hh:mm a').format(historicalDate);
+
                           return <Widget>[
-                            OrderItem(
-                              model: item,
-                              isHistorical: true,
+                            Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Divider(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color,
+                                    thickness: 1.0,
+                                    endIndent: 8.0,
+                                  ),
+                                ),
+                                Text(
+                                  formattedTime,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color,
+                                    thickness: 1.0,
+                                    indent: 8.0,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: itemSpacing,
-                            ),
+                            const SizedBox(height: 10.0),
+                            ...historicalItems.expand((item) => <Widget>[
+                                  OrderItem(
+                                    model: item,
+                                    isHistorical: true,
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                ]),
                           ];
                         })
                       else
