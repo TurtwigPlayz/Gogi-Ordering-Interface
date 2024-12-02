@@ -17,6 +17,9 @@ void main() {
       unitPrice: 10.99,
       imagePath: 'images/menu/seafood_pancake.jpg',
       categories: <String>['Appetizers'],
+      defaultOptions: <String, bool>{
+        'Dipping Sauce': true,
+      },
       description:
           "A savory pancake filled with fresh seafood and green onions, served with a soy-based dipping sauce.",
     ),
