@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:gogi_ordering_interface/widgets/icon_inkwell_button.dart';
 import 'package:gogi_ordering_interface/widgets/menu_item_detail.dart';
@@ -36,7 +38,12 @@ class OrderItem extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       model.menuItem.name,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: clampDouble(
+                                MediaQuery.of(context).size.width * 0.01,
+                                14,
+                                17),
+                          ),
                     ),
                     const SizedBox(width: 10.0),
                     TaggedText(

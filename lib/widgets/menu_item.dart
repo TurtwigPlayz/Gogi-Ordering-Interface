@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/models/menu_item_model.dart';
@@ -47,11 +48,21 @@ class MenuItem extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               menuItem.name,
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    fontSize: clampDouble(
+                                        MediaQuery.of(context).size.width *
+                                            0.01,
+                                        14,
+                                        16),
+                                  ),
                             ),
                             const SizedBox(width: 10.0),
                             TaggedText(
-                              text: menuItem.unitPrice.toStringAsFixed(2),
+                              text:
+                                  '\$${menuItem.unitPrice.toStringAsFixed(2)}',
                               backgroundColor: greenColor,
                             ),
                             const Expanded(child: SizedBox()),
@@ -80,7 +91,7 @@ class MenuItem extends StatelessWidget {
                                       session.currentOrder.containsKey(menuItem)
                                           ? Icons.edit
                                           : Icons.add,
-                                  iconSize: 22,
+                                  iconSize: 17,
                                 );
                               }),
                             )

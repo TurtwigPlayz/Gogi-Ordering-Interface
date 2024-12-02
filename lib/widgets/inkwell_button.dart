@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class InkwellButton extends StatelessWidget {
@@ -25,11 +26,14 @@ class InkwellButton extends StatelessWidget {
     final color =
         splashColor != null ? splashColor! : Theme.of(context).iconTheme.color!;
 
+    final borderRadius = this.borderRadius *
+        clampDouble(MediaQuery.of(context).size.width * 0.001, 1.0, 1.3);
+
     return Material(
       color: Theme.of(context).shadowColor,
       borderRadius: BorderRadius.circular(borderRadius),
       child: InkWell(
-        splashColor: color.withOpacity(0.2),
+        splashColor: color.withOpacity(0.75),
         onTap: onTap,
         borderRadius: BorderRadius.circular(borderRadius),
         child: Padding(
@@ -40,17 +44,26 @@ class InkwellButton extends StatelessWidget {
               if (icon != null)
                 Icon(
                   icon,
-                  size: iconSize,
+                  size: iconSize *
+                      clampDouble(
+                        MediaQuery.of(context).size.width * 0.0015,
+                        0.7,
+                        1.5,
+                      ),
                   color: color,
                 ),
               if (title != null) ...<Widget>[
                 const SizedBox(width: 10.0),
                 Text(
                   title!,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: color),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: color,
+                        fontSize: clampDouble(
+                          MediaQuery.of(context).size.width * 0.015,
+                          12.0,
+                          16.0,
+                        ),
+                      ),
                 ),
               ],
             ],

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,13 @@ class _OrderPanelState extends State<OrderPanel> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: <Widget>[
-                  Text(text, style: Theme.of(context).textTheme.bodySmall),
+                  Text(
+                    text,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontSize: clampDouble(
+                              MediaQuery.of(context).size.width * 0.01, 13, 17),
+                        ),
+                  ),
                   const Expanded(child: SizedBox()),
                   TaggedText(
                       text: '\$${cost.toStringAsFixed(2)}',
@@ -133,7 +140,16 @@ class _OrderPanelState extends State<OrderPanel> {
                                 ),
                                 Text(
                                   formattedTime,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: clampDouble(
+                                            MediaQuery.of(context).size.width *
+                                                0.01,
+                                            12,
+                                            16),
+                                      ),
                                 ),
                                 Expanded(
                                   child: Divider(

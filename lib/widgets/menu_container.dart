@@ -22,7 +22,7 @@ class MenuPage extends StatelessWidget {
               (category) => GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount:
-                      (MediaQuery.of(context).size.width / 260).floor(),
+                      (MediaQuery.of(context).size.width / 300).floor(),
                   mainAxisSpacing: spacing,
                   crossAxisSpacing: spacing,
                   childAspectRatio: 0.75,
