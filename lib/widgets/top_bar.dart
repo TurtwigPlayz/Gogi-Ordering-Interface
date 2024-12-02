@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/providers/session_provider.dart';
@@ -19,7 +21,8 @@ class TopBar extends StatelessWidget {
         dividerColor: Theme.of(context).cardColor,
         dividerHeight: 1.0,
         labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontSize: 17.0,
+              fontSize:
+                  clampDouble(MediaQuery.of(context).size.width * 0.01, 16, 20),
             ),
         tabs: <Widget>[
           ...['All', ...session.menuCategories].map(

@@ -7,7 +7,7 @@ class IconInkwellButton extends StatelessWidget {
     required this.onTap,
     required this.icon,
     this.splashColor,
-    this.iconSize = 20,
+    this.iconSize = 15,
   });
 
   final VoidCallback onTap;

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class LockedModal extends StatelessWidget {
@@ -18,7 +20,11 @@ class LockedModal extends StatelessWidget {
         ),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 300.0),
-          child: Text(message),
+          child: Text(message,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontSize: clampDouble(
+                        MediaQuery.of(context).size.width * 0.01, 14, 16),
+                  )),
         ),
       ),
       shape: RoundedRectangleBorder(

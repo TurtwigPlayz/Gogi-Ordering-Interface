@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:gogi_ordering_interface/providers/theme_provider.dart';
@@ -28,7 +29,7 @@ class Logo extends StatelessWidget {
               ]),
         child: Image.asset(
           'images/logo.png',
-          height: 65,
+          height: clampDouble(MediaQuery.of(context).size.height * 0.1, 65, 75),
         ),
       ),
     );
