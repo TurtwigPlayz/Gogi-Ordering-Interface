@@ -19,6 +19,26 @@ class OrderItem extends StatelessWidget {
   final OrderItemModel model;
   final bool isHistorical;
 
+  Widget _buildItemOptionRow(
+      String title, String value, Color color, BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontSize: clampDouble(
+                    MediaQuery.of(context).size.width * 0.01, 13, 16),
+              ),
+        ),
+        const Expanded(child: SizedBox()),
+        TaggedText(
+          text: value,
+          backgroundColor: color,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     BorderRadius borderRadius = BorderRadius.circular(10.0);
@@ -84,29 +104,28 @@ class OrderItem extends StatelessWidget {
                 ],
               ],
             ),
-            Row(
-              children: <Widget>[
-                if (model.options.isNotEmpty ||
-                    model.dropdownOptions.isNotEmpty) ...<Widget>[
-                  const SizedBox(width: 10.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      for (final option in model.options.entries)
-                        Text(
-                          '${option.key}: ${option.value ? 'Yes' : 'No'}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      for (final dropdown in model.dropdownOptions.entries)
-                        Text(
-                          '${dropdown.key}: ${model.dropdownSelections[dropdown.key]}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                    ],
-                  ),
-                ],
+            if (model.options.isNotEmpty ||
+                model.dropdownOptions.isNotEmpty) ...<Widget>[
+              const SizedBox(height: 9.0),
+              for (final option in model.options.entries) ...<Widget>[
+                _buildItemOptionRow(
+                  option.key,
+                  option.value ? 'Yes' : 'No',
+                  option.value ? greenColor : redColor,
+                  context,
+                ),
+                const SizedBox(height: 8.0),
               ],
-            )
+              for (final dropdown in model.dropdownOptions.entries) ...<Widget>[
+                _buildItemOptionRow(
+                  dropdown.key,
+                  model.dropdownSelections[dropdown.key] ?? 'Unknown',
+                  blueColor,
+                  context,
+                ),
+                const SizedBox(height: 8.0),
+              ],
+            ],
           ],
         ),
       ),
