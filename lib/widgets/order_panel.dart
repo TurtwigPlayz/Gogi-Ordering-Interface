@@ -183,10 +183,10 @@ class _OrderPanelState extends State<OrderPanel> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              _buildTotalCostTag(context, 'Order Cost', session.orderTotalCost),
+              _buildTotalCostTag(context, 'Current Order Cost', session.orderTotalCost),
               const SizedBox(height: 10.0),
               _buildTotalCostTag(
-                  context, 'Current Cost', session.currentTotalCost),
+                  context, 'Total Order Cost', session.currentTotalCost),
               const SizedBox(height: 20.0),
               if (!_isViewingOrderHistory)
                 InkwellButton(
@@ -222,7 +222,7 @@ class _OrderPanelState extends State<OrderPanel> {
                     },
                   ),
                 ),
-                title: 'Order Now',
+                title: 'Place Order',
                 icon: Icons.shopping_cart_checkout,
               ),
             ],
