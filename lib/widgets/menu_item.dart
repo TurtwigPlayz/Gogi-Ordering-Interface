@@ -46,18 +46,22 @@ class MenuItem extends StatelessWidget {
                             .withOpacity(0.8),
                         child: Row(
                           children: <Widget>[
-                            Text(
-                              menuItem.name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    fontSize: clampDouble(
+                            SizedBox(
+                              width: 80,
+                              child: Text(
+                                menuItem.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontSize: clampDouble(
                                         MediaQuery.of(context).size.width *
                                             0.01,
-                                        14,
-                                        16),
-                                  ),
+                                        13,
+                                        15,
+                                      ),
+                                    ),
+                              ),
                             ),
                             const SizedBox(width: 10.0),
                             TaggedText(

@@ -197,7 +197,7 @@ class _OrderPanelState extends State<OrderPanel> {
                 )
               else
                 InkwellButton(
-                  onTap: () => _toggleView(),
+                  onTap: _toggleView,
                   title: 'Back To Order',
                   icon: Icons.arrow_back,
                 ),

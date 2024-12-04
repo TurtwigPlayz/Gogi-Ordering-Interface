@@ -58,17 +58,21 @@ class OrderItem extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Text(
-                          model.menuItem.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                fontSize: clampDouble(
+                        SizedBox(
+                          width: 110,
+                          child: Text(
+                            model.menuItem.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontSize: clampDouble(
                                     MediaQuery.of(context).size.width * 0.01,
                                     14,
-                                    17),
-                              ),
+                                    17,
+                                  ),
+                                ),
+                          ),
                         ),
                         const SizedBox(width: 10.0),
                         TaggedText(
