@@ -19,6 +19,8 @@ void main() {
       categories: <String>['Appetizers'],
       defaultOptions: <String, bool>{
         'Dipping Sauce': true,
+        'Extra Spicy': false,
+        'Gluten-Free': false,
       },
       description:
           "A savory pancake filled with fresh seafood and green onions, served with a soy-based dipping sauce.",
@@ -187,7 +189,7 @@ void main() {
       unitPrice: 2.99,
       imagePath: 'images/menu/juice.jpg',
       dropdownOptions: <String, List<String>>{
-        'Juice': <String>[
+        'Type': <String>[
           'Apple',
           'Orange',
           'Mango',
@@ -243,6 +245,11 @@ void main() {
       unitPrice: 4.99,
       imagePath: 'images/menu/green_tea_ice_cream.jpg',
       categories: <String>['Desserts'],
+      defaultOptions: <String, bool>{
+        'Extra Whipped Cream': true,
+        'Gluten-Free': false,
+        'Extra Green Tea': false,
+      },
       description:
           "Creamy green tea-flavored ice cream, a refreshing way to end your meal.",
     ),
@@ -252,6 +259,11 @@ void main() {
         imagePath: 'images/menu/mochi_ice_cream.jpg',
         dropdownOptions: <String, List<String>>{
           'Flavors': <String>['Matcha', 'Vanilla', 'Strawberry', 'Chocolate'],
+        },
+        defaultOptions: <String, bool>{
+          'Extra Mochi': false,
+          'Gluten-Free': true,
+          'Extra Ice Cream': true,
         },
         categories: <String>['Desserts'],
         description:
@@ -284,15 +296,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final session = Provider.of<SessionProvider>(context, listen: false);
-
-    // Defer adding items to order for testing
-    Future.delayed(const Duration(seconds: 1), () {
-      session.addToOrder(session.menuItems[0]);
-      session.addToOrder(session.menuItems[1]);
-      session.addToOrder(session.menuItems[1]);
-    });
-
     return Consumer<ThemeProvider>(
       builder: (context, theme, child) => MaterialApp(
         title: 'Gogi Ordering Interface',

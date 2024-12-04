@@ -28,7 +28,7 @@ class MenuItemDetailState extends State<MenuItemDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         elevation: 0,
         scrolledUnderElevation: 0,
         title: Text(
@@ -207,7 +207,7 @@ class MenuItemDetailState extends State<MenuItemDetail> {
                       widget.orderItem, widget.orderItem.quantity);
                   Navigator.pop(context); // Return to the previous page
                 },
-                title: "Done",
+                title: "Save",
               ),
             ],
           ),
