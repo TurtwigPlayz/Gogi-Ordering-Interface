@@ -183,7 +183,8 @@ class _OrderPanelState extends State<OrderPanel> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              _buildTotalCostTag(context, 'Current Order Cost', session.orderTotalCost),
+              _buildTotalCostTag(
+                  context, 'Current Order Cost', session.orderTotalCost),
               const SizedBox(height: 10.0),
               _buildTotalCostTag(
                   context, 'Total Order Cost', session.currentTotalCost),
@@ -196,7 +197,7 @@ class _OrderPanelState extends State<OrderPanel> {
                 )
               else
                 InkwellButton(
-                  onTap: () => _toggleView(),
+                  onTap: _toggleView,
                   title: 'Back To Order',
                   icon: Icons.arrow_back,
                 ),
@@ -224,6 +225,9 @@ class _OrderPanelState extends State<OrderPanel> {
                 ),
                 title: 'Place Order',
                 icon: Icons.shopping_cart_checkout,
+                isDisabled: session.currentOrder.isEmpty,
+                disabledMessage:
+                    'Your order is currently empty. Please add items to your order.',
               ),
             ],
           ),
