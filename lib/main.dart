@@ -47,7 +47,7 @@ void main() {
     MenuItemModel(
       name: 'Beef Brisket',
       unitPrice: 16.99,
-      imagePath: 'images/menu/beef_brisket.jpg',
+      imagePath: 'images/menu/beef_brisket.jpeg',
       dropdownOptions: <String, List<String>>{
         'Cooking Style': <String>['Grilled', 'Charcoal'],
         'Sauce': <String>['Soy Garlic', 'Spicy', 'Sweet BBQ'],
@@ -83,7 +83,7 @@ void main() {
     MenuItemModel(
       name: 'Garlic Shrimp',
       unitPrice: 13.99,
-      imagePath: 'images/menu/garlic_shrimp.jpg',
+      imagePath: 'images/menu/garlic_shrimp.webp',
       dropdownOptions: <String, List<String>>{
         'Cooking Style': <String>['Grilled', 'Pan-Fried'],
       },
@@ -125,7 +125,7 @@ void main() {
     MenuItemModel(
       name: 'Spicy Pork Bulgogi',
       unitPrice: 13.99,
-      imagePath: 'images/menu/spicy_pork_bulgogi.jpg',
+      imagePath: 'images/menu/spicy_pork_bulgogi.webp',
       dropdownOptions: <String, List<String>>{
         'Spice Level': <String>['Mild', 'Medium', 'Hot'],
       },
@@ -138,7 +138,7 @@ void main() {
     MenuItemModel(
       name: 'Egg Custard',
       unitPrice: 4.99,
-      imagePath: 'images/menu/egg_custard.jpg',
+      imagePath: 'images/menu/egg_custard.webp',
       categories: <String>['Sides'],
       description: "A light and savory steamed egg custard.",
     ),
@@ -177,7 +177,7 @@ void main() {
     MenuItemModel(
       name: 'Barley Tea (Bori Cha)',
       unitPrice: 1.99,
-      imagePath: 'images/menu/barley_tea.jpg',
+      imagePath: 'images/menu/barley_tea.jpeg',
       categories: <String>['Drinks'],
       description:
           "A light and nutty traditional Korean tea served hot or cold.",
@@ -185,7 +185,7 @@ void main() {
     MenuItemModel(
       name: 'Juice',
       unitPrice: 2.99,
-      imagePath: 'images/menu/barley_tea.jpg',
+      imagePath: 'images/menu/juice.jpg',
       dropdownOptions: <String, List<String>>{
         'Juice': <String>[
           'Apple',
@@ -210,7 +210,7 @@ void main() {
     MenuItemModel(
       name: 'Milkis Soda',
       unitPrice: 2.99,
-      imagePath: 'images/menu/milkis.jpg',
+      imagePath: 'images/menu/milkis_soda.jpg',
       categories: <String>['Drinks'],
       description:
           "A unique carbonated soft drink with a creamy and sweet taste.",
@@ -218,13 +218,23 @@ void main() {
     MenuItemModel(
       name: 'Pop',
       unitPrice: 1.99,
-      imagePath: 'images/menu/barley_tea.jpg',
+      imagePath: 'images/menu/pop.jpg',
       dropdownOptions: <String, List<String>>{
         'Pop': <String>['Coca Cola', 'Sprite', 'Iced Tea', 'Lemonade'],
         'Ice Level': <String>['Ice', 'No Ice', 'Less Ice'],
       },
       categories: <String>['Drinks'],
-      description: "Fountain Drink.",
+      description: "Carbonated Fountain Drink.",
+    ),
+    MenuItemModel(
+      name: 'Water',
+      unitPrice: 0.00,
+      imagePath: 'images/menu/water.jpg',
+      dropdownOptions: <String, List<String>>{
+        'Ice Level': <String>['Ice', 'No Ice', 'Less Ice'],
+      },
+      categories: <String>['Drinks'],
+      description: "A Glass of water",
     ),
 
     // Desserts
