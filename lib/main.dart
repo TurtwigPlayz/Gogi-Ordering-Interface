@@ -141,7 +141,7 @@ void main() {
       name: 'Egg Custard',
       unitPrice: 4.99,
       imagePath: 'images/menu/egg_custard.webp',
-      categories: <String>['Sides'],
+      categories: <String>['Desserts'],
       description: "A light and savory steamed egg custard.",
     ),
     MenuItemModel(

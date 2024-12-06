@@ -173,6 +173,10 @@ class MenuItemDetailState extends State<MenuItemDetail> {
                     children: <Widget>[
                       IconButton(
                         onPressed: () {
+                          if (widget.orderItem.quantity == 1) {
+                            return;
+                          }
+
                           setState(() {
                             widget.orderItem.updateQuantity(-1);
                           });
